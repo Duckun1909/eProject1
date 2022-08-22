@@ -71,6 +71,9 @@
     transform: rotateX(-90deg);
     opacity: 0;
 }
+.header__navbar ul>li{
+    z-index: 1;
+}
 .header__navbar-subnav--animate:hover > div{
     animation: rotatePerspectiveIn .3s linear forwards;
 }
@@ -81,7 +84,6 @@
 }
 .header__categories ul li{
     color: initial;
-    z-index: 1;
 }
 
 .header__navbar-service > div{
@@ -147,7 +149,7 @@
 .search_bar--zoomIn{
     opacity: 1;
     animation: zoomIn 1.5s linear forwards;
-    z-index: -1;
+    z-index: 0;
 }
 
 .search_bar input{
@@ -187,7 +189,7 @@
 .user_own.user_own--flipInX{
     opacity: 1;
     animation: flipInX 1.5s linear forwards;
-    z-index: -1;
+    z-index: 0;
 }
 
 .search_bar div{

@@ -65,7 +65,7 @@ $(document).ready(function() {
         e.preventDefault();
         $('.header').removeClass('headerAbout');
         $.ajax({
-            url: '../home.html',
+            url: './home.html',
             type: 'GET',
             dataType: 'html',
             success: function(data) {
@@ -94,6 +94,7 @@ $(document).ready(function() {
 
     $('.nav-item-product').click((e)=>{
         e.preventDefault();
+        $('.header').addClass('headerAbout');
         $.ajax({
             url: '../product.html',
             type: 'GET',

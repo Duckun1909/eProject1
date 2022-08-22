@@ -1,0 +1,7 @@
+.register-header{
+    background: #f6f4ee;
+    padding: 16px 0px;
+}
+.register-header__linker-curPage span{
+    color: var(--hover-color-link);
+}
