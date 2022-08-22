@@ -81,7 +81,7 @@ $(document).ready(function() {
         e.preventDefault();
         $('.header').addClass('headerAbout');
         $.ajax({
-            url: '../aboutUs.html',
+            url: './aboutUs.html',
             type: 'GET',
             dataType: 'html',
             success: function(data){
@@ -96,7 +96,7 @@ $(document).ready(function() {
         e.preventDefault();
         $('.header').addClass('headerAbout');
         $.ajax({
-            url: '../product.html',
+            url: './product.html',
             type: 'GET',
             dataType: 'html',
             success: function(data){
