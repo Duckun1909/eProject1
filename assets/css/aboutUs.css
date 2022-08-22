@@ -1,0 +1,80 @@
+.aboutUs-header{
+    background: #f6f4ee;
+    padding: 16px 0px;
+}
+.aboutUs-header__linker-curPage span{
+    color: var(--hover-color-link);
+}
+
+.aboutUs-body__general-img div{
+    height: 100%;
+    background-image: url('https://demo037136.web30s.vn/image-process/get-image-v3?path=/datafiles/web30s/upload/images/7101-7200/30S-03-7136/about-1.jpg&width=0');
+    background-size: cover;
+    background-position: center;
+}
+.aboutUs-body__general-content-title h1{
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+.aboutUs-body__other-banner > div{
+    height: 450px;
+    max-height: 450px;
+}
+.aboutUs-body__other-banner1 div{
+    height: 100%;
+    background-image: url('https://demo037136.web30s.vn/image-process/get-image-v3?path=/datafiles/web30s/upload/images/7101-7200/30S-03-7136/about-2.jpg&width=0');
+}
+.aboutUs-body__other-banner2 div{
+    height: 100%;
+    background-image: url('https://demo037136.web30s.vn/image-process/get-image-v3?path=/datafiles/web30s/upload/images/7101-7200/30S-03-7136/about-3.jpg&width=0');
+}
+
+.aboutUs-body__other-content-title h1{
+    font-size: 1.563rem;
+    font-weight: bold;
+    color: #292929;
+}
+.aboutUs-body__other-content-decribe p{
+    line-height: 1.6;
+}
+.aboutUs-body__promotion .promotion-item{
+    background-color:var(--back-item);
+    padding:70px 40px; 
+    color: #fff;
+}
+.aboutUs-body__promotion-content-title{
+    font-size: 2.5rem; 
+    font-weight: bold;
+    line-height: 1.2;
+    text-transform: capitalize;
+}
+.aboutUs-body__promotion-content-btn{
+    font-size: 0.938rem;
+    text-transform: uppercase;
+    letter-spacing: 2px; 
+    position: relative;
+    width: fit-content;
+}
+.aboutUs-body__promotion-content-btn::before{
+    content: "";
+    display: inline-block;
+    left: 0px;
+    bottom: -5px;
+    background-color: #292929;
+    width: 0px;
+    height: 1px;
+    position: absolute;
+    transition: all .3s ease-in-out;
+}
+.aboutUs-body__promotion-content-btn:hover::before{
+    width: 100%;
+}
+.aboutUs-body__promotion-content-btn:hover{
+    color: #292929;
+    cursor: pointer;
+}
+.aboutUs-body__promotion-img{
+    background-image: url('https://demo037136.web30s.vn/image-process/get-image-v3?path=/datafiles/web30s/upload/images/7101-7200/30S-03-7136/slider-2.jpg&width=0');
+    background-size: cover;
+    background-position: center;
+}

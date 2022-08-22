@@ -1,0 +1,61 @@
+.product-header{
+    background: #f6f4ee;
+    padding: 16px 0px;
+}
+.product-header__linker-curPage span{
+    color: var(--hover-color-link);
+}
+.product-body__filter-title{
+    height: 62px;
+    box-shadow: rgb(0 0 0 / 15%) 0px 2px 12px;
+    padding: 0px 15px;
+}
+.product-body__filter-title h1{
+    font-size: 1.875rem;
+    color: #292929;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.product-body__filter-title > div{
+    display: flex;
+    align-items: center;
+    background-color: var(--back-item);
+    padding: 8px 30px;
+    color: #fff;
+    cursor: pointer;
+}
+.product-body__filter-taskbar .filter-select{
+    outline: unset;
+    margin-left: 10px;
+}
+.product-body__filter-taskbar-view i{
+    font-size: 1.5rem;
+}
+.product-body__filter-pagnigation ul li{
+    background-color: #f6f4ee; 
+    width:40px; 
+    height:40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-tool__color-items .color-box{
+    width: 25px;
+    height: 25px;
+    background-color: red;
+    margin: 0px 10px;
+}
+.product-tool{
+    width: 400px;
+    max-width: 400px;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: #fff;
+    z-index: 1;
+    opacity: 0;
+    transform: translateX(400px);
+    transition: transform .5s ease-in-out;
+}
