@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 20, 2022 at 03:11 PM
+-- Generation Time: Aug 22, 2022 at 03:57 PM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -44,6 +44,17 @@ CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `cate_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `cate_name`) VALUES
+(1, 'industrial fans'),
+(2, 'stand fan'),
+(3, 'ceiling fans'),
+(4, 'floor fan'),
+(5, 'air purifier');
 
 -- --------------------------------------------------------
 
@@ -138,7 +149,9 @@ CREATE TABLE `user` (
   `user_password` char(40) NOT NULL,
   `user_email` varchar(100) NOT NULL,
   `user_phone` int(11) NOT NULL,
-  `user_avt` varchar(200) NOT NULL
+  `user_avt` varchar(200) NOT NULL,
+  `user_address` int(11) NOT NULL,
+  `user_fullname` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -245,7 +258,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `comments`

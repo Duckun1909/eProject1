@@ -2,7 +2,7 @@
     $host = 'localhost';
     $username = 'root';
     $password = '';
-    $db = 'FanimationPage';
+    $db = 'fanimationPage';
 
     $conn = new mysqli($host, $username, $password, $db);
 

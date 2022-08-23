@@ -1,0 +1,29 @@
+.login-header {
+    background: #f6f4ee;
+    padding: 16px 0px;
+}
+
+.login-header__linker-curPage span {
+    color: var(--hover-color-link);
+}
+
+.loginOther button i {
+    font-size: 1rem;
+    margin-right: 10px;
+}
+
+.loginOther button {
+    color: #fff;
+}
+
+.btn-facebook {
+    background: #3b5998;
+}
+
+.btn-google {
+    background-color: #dc4e41;
+}
+
+.btn-zalo {
+    background-color: #0591e9;
+}
