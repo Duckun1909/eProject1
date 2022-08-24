@@ -19,4 +19,36 @@ $(document).ready(function() {
             }
         })
     })
+
+    $('#loginForm').submit(function(e) {
+        e.preventDefault();
+        var form = new FormData(this);
+        form.append('login', 'true');
+
+        $.ajax({
+            url: './login.php',
+            type: 'POST',
+            dataType: 'text',
+            data: form,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function(res) {
+                if (res == 1) {
+                    alert('Đăng nhập thành công!');
+                    $('#loginForm')[0].reset();
+                    $.ajax({
+                        url: './profile.html',
+                        type: 'GET',
+                        dataType: 'html',
+                        success: function(data) {
+                            $('.body').html(data);
+                        }
+                    })
+                } else {
+                    alert('Đăng nhập thất bại, vui lòng kiểm tra lại thông tin');
+                }
+            }
+        })
+    })
 })

@@ -1,14 +1,22 @@
-.register-header{
+.register-header {
     background: #f6f4ee;
     padding: 16px 0px;
 }
-.register-header__linker-curPage span{
+
+.register-header__linker-curPage span {
     color: var(--hover-color-link);
 }
 
-
-#registerForm{
+#registerForm {
     width: 1000px;
     max-width: 1000px;
     margin: auto;
+}
+
+.border-success {
+    border: 1px solid #00c0a7;
+}
+
+.border-invalid {
+    border: 1px solid #f44542;
 }

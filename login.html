@@ -17,8 +17,8 @@
         <div class="container">
             <div class="p-5 w-50 m-auto" style="box-shadow: var(--shadow-block);">
                 <form action="" id="loginForm" method="POST" class="mb-4">
-                    <input class="w-100 border pt-2 pb-2 ps-3 pe-3 mb-4" type="text" name="username" placeholder="Username">
-                    <input class="w-100 border pt-2 pb-2 ps-3 pe-3 mb-4" type="password" name="password" placeholder="Password">
+                    <input class="w-100 border pt-2 pb-2 ps-3 pe-3 mb-4" type="text" minlength="6" name="username" placeholder="Username" required>
+                    <input class="w-100 border pt-2 pb-2 ps-3 pe-3 mb-4" type="password" minlength="8" name="password" placeholder="Password" required>
                     <button type="submit" class="pt-2 pb-2 ps-4 pe-4 hover-back-button btn-background me-3">Login</button>
                 </form>
 

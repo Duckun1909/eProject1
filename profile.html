@@ -1,0 +1,157 @@
+<div class="profile">
+    <div class="profile-header mb-5">
+        <div class="container profile-header__linker text-end">
+            <span class="profile-header__linker-fromPage">
+                        <i class="fa-solid fa-house-chimney pe-1 hover_link"></i>
+                        <span class="pe-1 hover_link">Home</span>
+            </span>
+
+            <span class="profile-header__linker-curPage">
+                        <i class="fa-solid fa-caret-right pe-1"></i>
+                        <span>Profile</span>
+            </span>
+        </div>
+    </div>
+
+    <div class="profile-body mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="profile-body__sidebar col-3">
+                    <div class="border-end">
+                        <div class="profile-body__sidebar-header d-flex align-items-center mb-4">
+                            <div class="user_avt position-relative">
+                                <img src="./assets/img/logo2.png " width="100% " alt=" ">
+                                <form action="" method="POST" class="position-absolute end-0" style="bottom: -10px;" enctype="multipart/form-data">
+                                    <label for="useravt"><i style="color: var(--hover-color-link);" class="fa-solid fa-camera"></i></label>
+                                    <input type="file" name="user_avt" hidden id="useravt">
+                                </form>
+                            </div>
+                            <div class="user_name ">
+                                <h3>Phạm Huỳnh Đức</h3>
+                                <h3>Edit account</h3>
+                            </div>
+                        </div>
+
+                        <div class="profile-body__sidebar-body ">
+                            <div class="transact ">
+                                <div class="transact-header profile-header-sidebar ">
+                                    <h1>Transaction management</h1>
+                                </div>
+                                <ul class="transac-body profile-body-sidebar ">
+                                    <li class="hover_link nav-link--active ">
+                                        <i class="fa-solid fa-file "></i>
+                                        <span>Your order</span>
+                                    </li>
+                                    <li class="hover_link ">
+                                        <i class="fa-solid fa-eye "></i>
+                                        <span>Viewed product</span>
+                                    </li>
+                                    <li class="hover_link ">
+                                        <i class="fa-solid fa-heart "></i>
+                                        <span>Favourite list</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <ul class="account ">
+                                <div class="account-header profile-header-sidebar ">
+                                    <h1>Account Manager</h1>
+                                </div>
+                                <div class="account-body profile-body-sidebar ">
+                                    <li class="hover_link ">
+                                        <i class="fa-solid fa-pen-to-square "></i>
+                                        <span>Account information</span>
+                                    </li>
+                                    <li class="hover_link ">
+                                        <i class="fa-solid fa-key "></i>
+                                        <span>Change password</span>
+                                    </li>
+                                    <li></li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-body__content col-9 ">
+                    <div>
+                        <div class="profile-body__content-header ">
+                            <h1>Transaction management</h1>
+                        </div>
+
+                        <div class="profile-body__content-body ">
+                            <div class="row ">
+                                <div id="yourOrder " class="render-form render-order render-form--active ">
+                                    There is no information for this data type
+                                </div>
+
+                                <div id="yourViewed " class="render-form render-viewed ">
+                                    There is no information for this data type
+                                </div>
+
+                                <div id="yourFavourite " class="render-form render-liked ">
+                                    There is no information for this data type
+                                </div>
+
+                                <div class="render-form render-inforuser ">
+                                    <form action=" " id="editUserForm" method="POST " class="w-80 m-auto ">
+                                        <div class="d-flex align-items-center mb-3 ">
+                                            <label for=" " class="w-25 ">Username:</label>
+                                            <input type="text " class="w-75 border p-2 " name="username " disabled placeholder="Username ">
+                                        </div>
+                                        <div class="d-flex align-items-center mb-3 ">
+                                            <label for=" " class="w-25 ">Email:</label>
+                                            <input type="text " class="w-75 border p-2 " name="email " disabled placeholder="Email ">
+                                        </div>
+                                        <div class="d-flex align-items-center mb-3 ">
+                                            <label for=" " class="w-25 ">Fullname:</label>
+                                            <input type="text " class="w-75 border p-2 " name="fullname " placeholder="Fullname ">
+                                        </div>
+                                        <div class="d-flex align-items-center mb-3 ">
+                                            <label for=" " class="w-25 ">Phone:</label>
+                                            <input type="text " class="w-75 border p-2 " name="phone " disabled placeholder="Phone ">
+                                        </div>
+                                        <div class="d-flex align-items-center mb-3 ">
+                                            <label for=" " class="w-25 ">Address:</label>
+                                            <input type="text " class="w-75 border p-2 " name="address " placeholder="Address ">
+                                        </div>
+                                        <div class="d-flex align-items-center mb-3 ">
+                                            <label for=" " class="w-25 ">Reward points:</label>
+                                            <span class="w-75 reward-points " style="color: var(--hover-color-link); ">0</span>
+                                        </div>
+                                        <div class="d-flex align-items-center ">
+                                            <label for=" " class="w-25 "></label>
+                                            <input type="submit" class="border hover-back-button btn-background p-2 " value="Save information">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class=" render-form render-changepass ">
+                                    <form action=" " id="changePassForm " method="post " class="w-80 m-auto ">
+                                        <div class="d-flex align-items-center mb-3 ">
+                                            <label for=" " class="w-25 ">Old password:</label>
+                                            <input type="text " class="w-75 border p-2 " name="oldPass " placeholder="****** ">
+                                        </div>
+                                        <div class="d-flex align-items-center mb-3 ">
+                                            <label for=" " class="w-25 ">New password:</label>
+                                            <input type="text " class="w-75 border p-2 " name="newPass " placeholder="****** ">
+                                        </div>
+                                        <div class="d-flex align-items-center mb-3 ">
+                                            <label for=" " class="w-25 ">Confirm pasword:</label>
+                                            <input type="text " class="w-75 border p-2 " name="confirm_newPass " placeholder="****** ">
+                                        </div>
+                                        <div class="d-flex align-items-center ">
+                                            <label for=" " class="w-25 "></label>
+                                            <input type="submit" class="border hover-back-button btn-background p-2 " value="Change password ">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="./assets/js/profile.js "></script>
