@@ -1,6 +1,10 @@
 $(document).ready(function() {
     $.ajax({
+<<<<<<< HEAD
         url: 'home.html',
+=======
+        url: './home.html',
+>>>>>>> 008af980713dd10bfad260093e90a11930e48c53
         type: 'GET',
         dataType: 'html',
         success: function(data) {
@@ -80,7 +84,11 @@ $(document).ready(function() {
         e.preventDefault();
         $('.header').addClass('headerAbout');
         $.ajax({
+<<<<<<< HEAD
             url: './aboutUs.html',
+=======
+            url: 'aboutUs.html',
+>>>>>>> 008af980713dd10bfad260093e90a11930e48c53
             type: 'GET',
             dataType: 'html',
             success: function(data) {
@@ -95,7 +103,11 @@ $(document).ready(function() {
         e.preventDefault();
         $('.header').addClass('headerAbout');
         $.ajax({
+<<<<<<< HEAD
             url: './product.html',
+=======
+            url: 'product.html',
+>>>>>>> 008af980713dd10bfad260093e90a11930e48c53
             type: 'GET',
             dataType: 'html',
             success: function(data) {
