@@ -23,6 +23,10 @@ input {
     max-width: 80%;
 }
 
+.w-fit {
+    width: fit-content;
+}
+
 .text-link-color {
     color: var(--back-item);
 }

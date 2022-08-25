@@ -1,0 +1,36 @@
+.sidebar-header__avt img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    border: 2px solid #fff;
+    border-radius: 50%;
+}
+
+.sidebar-body--hover:hover {
+    background-color: #c6defd;
+    color: #001c40;
+    transition: all .2s linear;
+}
+
+.btn.sidebar-body--active {
+    background-color: #c6defd;
+    color: #001c40;
+}
+
+.sidebar {
+    color: #fff;
+    background-color: #001c40;
+}
+
+.sidebar-header__name h2 {
+    font-size: 1.063rem;
+    font-weight: bold;
+}
+
+.sidebar-header__name h3 {
+    font-size: 0.875;
+}
+
+.sidebar-body ul li {
+    color: #fff;
+}
