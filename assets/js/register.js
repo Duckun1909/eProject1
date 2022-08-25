@@ -136,7 +136,7 @@ $(document).ready(function() {
 
         var text = form.get('username');
         $.ajax({
-            url: 'register.php',
+            url: './register.php',
             type: 'POST',
             dataType: 'text',
             data: form,
