@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 22, 2022 at 03:57 PM
+-- Generation Time: Aug 26, 2022 at 09:18 AM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -31,8 +31,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `admin_name` int(11) NOT NULL,
-  `admin_password` char(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `admin_password` char(40) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -42,8 +42,8 @@ CREATE TABLE `admin` (
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
-  `cate_name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `cate_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `categories`
@@ -66,7 +66,7 @@ CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `comment_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -77,9 +77,9 @@ CREATE TABLE `comments` (
 CREATE TABLE `commentsdetails` (
   `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `content` varchar(500) NOT NULL,
+  `content` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `rating` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -90,8 +90,8 @@ CREATE TABLE `commentsdetails` (
 CREATE TABLE `gallery` (
   `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `img` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `img` varchar(200) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -103,9 +103,9 @@ CREATE TABLE `orderdetails` (
   `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `color` char(10) NOT NULL,
+  `color` char(10) COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -115,15 +115,16 @@ CREATE TABLE `orderdetails` (
 
 CREATE TABLE `product` (
   `id` int(11) NOT NULL,
-  `product_name` varchar(100) NOT NULL,
+  `product_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `product_quantity` int(11) NOT NULL,
   `product_quality` int(11) NOT NULL,
-  `product_brand` varchar(50) NOT NULL,
+  `product_brand` int(11) NOT NULL,
   `product_price` float NOT NULL,
-  `cate_id` int(11) NOT NULL,
-  `product_avt` varchar(200) NOT NULL,
-  `discount` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `product_cate` int(11) NOT NULL,
+  `product_avt` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `product_discount` int(11) NOT NULL,
+  `product_status` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -134,8 +135,8 @@ CREATE TABLE `product` (
 CREATE TABLE `productdetails` (
   `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `color` char(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `color` char(20) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -145,14 +146,22 @@ CREATE TABLE `productdetails` (
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-  `user_name` varchar(200) NOT NULL,
-  `user_password` char(40) NOT NULL,
-  `user_email` varchar(100) NOT NULL,
-  `user_phone` int(11) NOT NULL,
-  `user_avt` varchar(200) NOT NULL,
-  `user_address` int(11) NOT NULL,
-  `user_fullname` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `user_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `user_password` char(40) COLLATE utf8_unicode_ci NOT NULL,
+  `user_email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `user_phone` char(10) COLLATE utf8_unicode_ci NOT NULL,
+  `user_avt` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `user_fullname` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `user_name`, `user_password`, `user_email`, `user_phone`, `user_avt`, `user_address`, `user_fullname`) VALUES
+(1, 'HuynhDuc1909', '7c222fb2927d828af22f592134e8932480637c0d', 'ducleader2003@gmail.com', '1111111111', NULL, 'Việt Nam', 'phạm huỳnh đức'),
+(2, 'Duc123', 'a642a77abd7d4f51bf9226ceaf891fcbb5b299b8', 'duc.ph.2045@aptechlearning.edu.vn', '396345593', NULL, 'Việt Nam', 'Phạm Huỳnh Đức');
 
 -- --------------------------------------------------------
 
@@ -163,10 +172,10 @@ CREATE TABLE `user` (
 CREATE TABLE `user_order` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `shipping_address` varchar(200) NOT NULL,
+  `shipping_address` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `shipping_phone` int(11) NOT NULL,
-  `shipping_name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `shipping_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Indexes for dumped tables
@@ -221,7 +230,7 @@ ALTER TABLE `orderdetails`
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `productName` (`product_name`),
-  ADD KEY `cate_id` (`cate_id`);
+  ADD KEY `cate_id` (`product_cate`);
 
 --
 -- Indexes for table `productdetails`
@@ -235,7 +244,9 @@ ALTER TABLE `productdetails`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`user_name`);
+  ADD UNIQUE KEY `username` (`user_name`),
+  ADD UNIQUE KEY `user_email` (`user_email`),
+  ADD UNIQUE KEY `user_phone` (`user_phone`);
 
 --
 -- Indexes for table `user_order`
@@ -300,7 +311,7 @@ ALTER TABLE `productdetails`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_order`
@@ -342,7 +353,7 @@ ALTER TABLE `orderdetails`
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`cate_id`) REFERENCES `categories` (`id`);
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`product_cate`) REFERENCES `categories` (`id`);
 
 --
 -- Constraints for table `productdetails`
