@@ -1,10 +1,4 @@
 $(document).ready(function() {
-    $('#registerForm .toLogin').click(() => {
-        $.ajax({
-            url: '../'
-        })
-    })
-
     $('.headerAbout').css({ 'background-color': '#fff', 'position': 'unset', 'padding': '20px 0px' });
     $(window).scroll(function() {
         var scroll_top = $(this).scrollTop();
