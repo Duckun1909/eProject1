@@ -25,7 +25,7 @@
         if($checkRegister == 0){
             echo '0';
         }else{
-            $sql = sprintf("INSERT into user values(null, '%s', '%s', '%s', %d, null, N'%s', N'%s')", $username, sha1($password), $email, $phone, $address, $fullname);
+            $sql = sprintf("INSERT into user values(null, '%s', '%s', '%s', '%s', null, N'%s', N'%s')", $username, sha1($password), $email, $phone, $address, $fullname);
             if($conn->query($sql)){
                 echo '1';
             }else{

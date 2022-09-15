@@ -1,0 +1,35 @@
+.contact-header {
+    background: #f6f4ee;
+    padding: 16px 0px;
+}
+
+.contact-header__linker-curPage span {
+    color: var(--hover-color-link);
+}
+
+.maps {
+    max-width: 100%;
+}
+
+.contact--p {
+    margin-left: 0.625rem;
+}
+
+.contact--a:hover {
+    color: #be6f4c;
+    text-decoration: none;
+}
+
+.contact--flex {
+    margin-right: 0.625rem;
+}
+
+.contact--btn {
+    margin-right: 1.25rem;
+    background-color: #be6f4c;
+    color: white;
+}
+
+.contact--btn:hover {
+    background-color: #16d442;
+}

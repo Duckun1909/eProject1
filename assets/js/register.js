@@ -27,7 +27,6 @@ $(document).ready(function() {
         let checkEmpty = 0;
         $(inputQuery).blur(function(e) {
             let nameClass = $(this).parent().children().last('div').attr('class');
-            console.log(nameClass)
             if ($(inputQuery).val() != '') {
                 if (nameClass != 'invalid' && nameClass != 'confirm' && nameClass != 'security') {
                     console.log(1);
@@ -112,7 +111,6 @@ $(document).ready(function() {
 
     let checkSecur = 0;
     $('input[name="securCode"]').keyup(function(e) {
-        console.log(x);
         if ($(this).val() != x) {
             if (checkSecur == 0) {
                 $(this).parent().children('.empty').remove();

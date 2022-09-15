@@ -22,7 +22,6 @@
     <link rel="stylesheet" href="./assets/css/admin.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="./assets/js/admin.js"></script>
 </head>
 
 <body>
@@ -77,7 +76,7 @@
                     </div>
 
                     <div class="tab-body__content p-3 back0">
-                        <div id="prd-form" class="d-none">
+                        <div id="prd-form" class="">
                             <div class="prd-form-btn pb-3 border-bottom">
                                 <div class="btn btn-success p-1 me-1 btn-addprd">
                                     <i class="fa-solid fa-plus"></i>
@@ -93,18 +92,18 @@
                                 <div class="render-filter d-flex justify-content-between align-items-center mt-3 mb-3">
                                     <div class="render-filter__view">
                                         <span class="font-txt">Hiện
-                                            <select name="" class="border radius-input back2 outline-unset">
-                                                <option value="">10</option>
-                                                <option value="">25</option>
-                                                <option value="">50</option>
-                                                <option value="">100</option>
+                                            <select name="tabLength" class="border radius-input back2 outline-unset">
+                                                <option value="10" selected>10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
                                             </select>
                                             danh mục
                                         </span>
                                     </div>
                                     <div class="render-filter__search p-2 border radius-input">
                                         <label for="search" class=" bold">Search:</label>
-                                        <input type="text" name="search" id="search" class="border radius-input back2 font-txt pt-1 pb-1 ps-2 pe-2">
+                                        <input type="text" name="search" id="admin-prdSearch" class="border radius-input back2 font-txt pt-1 pb-1 ps-2 pe-2">
                                     </div>
                                 </div>
 
@@ -125,48 +124,83 @@
                                         </thead>
 
                                         <tbody>
-                                            <tr id="">
-                                                <td class="p-2 border prd-check text-center"><input type="checkbox"></td>
-                                                <td class="p-2 border prd-code">0</td>
-                                                <td class="p-2 border prd-name">Bàn ăn gỗ Theresa</td>
-                                                <td class="p-2 border prd-img"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdMwXpGa7Lxo0sN1CSqaIWs05e7Q5RCEELeQ&usqp=CAU" width="20%" alt=""></td>
-                                                <td class="p-2 border prd-quantity">40</td>
-                                                <td class="p-2 border prd-status">
-                                                    <div><span>Còn hàng</span></div>
-                                                </td>
-                                                <td class="p-2 border prd-price">$100</td>
-                                                <td class="p-2 border prd-cate">Bàn ăn</td>
-                                                <td class="p-2 border prd-options">
-                                                    <button class="trash pt-1 pb-1 ps-2 pe-2 border radius-input btn--active">
-                                                        <i class="fa-solid fa-trash-can"></i>
-                                                    </button>
-                                                    <button class="edit pt-1 pb-1 ps-2 pe-2 border radius-input btn--active">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr id="">
-                                                <td class="p-2 border prd-check text-center"><input type="checkbox"></td>
-                                                <td class="p-2 border prd-code">0</td>
-                                                <td class="p-2 border prd-name">Bàn ăn gỗ Theresa</td>
-                                                <td class="p-2 border prd-img"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdMwXpGa7Lxo0sN1CSqaIWs05e7Q5RCEELeQ&usqp=CAU" width="20%" alt=""></td>
-                                                <td class="p-2 border prd-quantity">40</td>
-                                                <td class="p-2 border prd-status">
-                                                    <div><span>Còn hàng</span></div>
-                                                </td>
-                                                <td class="p-2 border prd-price">$100</td>
-                                                <td class="p-2 border prd-cate">Bàn ăn</td>
-                                                <td class="p-2 border prd-options">
-                                                    <button class="trash pt-1 pb-1 ps-2 pe-2 border radius-input btn--active">
-                                                        <i class="fa-solid fa-trash-can"></i>
-                                                    </button>
-                                                    <button class="edit pt-1 pb-1 ps-2 pe-2 border radius-input btn--active">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
+
                                         </tbody>
                                     </table>
+                                    <div class="modal fade " id="EditPrdModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" style="max-width: 70%;">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-titlec bold" id="staticBackdropLabel" style="font-size: 20px;">Chỉnh sửa thông tin sản phẩm cơ bản</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="" id="editForm" class="row">
+                                                        <div class="mb-3 col-4">
+                                                            <label for="prdName" class="form-label">Product name</label>
+                                                            <input type="text" class="w-100 p-2 border radius-input back2" id="prdName" name="prdName" required>
+                                                        </div>
+                                                        <div class="mb-3 col-4">
+                                                            <label for="prdQuantity" class="form-label">Quantity</label>
+                                                            <input type="number" class="w-100 p-2 border radius-input back2" id="prdQuantity" name="prdQuantity" required>
+                                                        </div>
+                                                        <div class="mb-3 col-4">
+                                                            <label for="prdQuality" class="form-label">Quality(*)</label>
+                                                            <input type="number" min="0" max="5" class="w-100 p-2 border radius-input back2" id="prdQuality" name="prdQuality" required>
+                                                        </div>
+                                                        <div class="mb-3 col-4">
+                                                            <label for="prdCate" class="form-label">Categories</label>
+                                                            <select name="prdCate" class="w-100 p-2 border radius-input back2" id="prdCate" required></select>
+                                                        </div>
+                                                        <div class="mb-3 col-4">
+                                                            <label for="prdBrand" class="form-label">Brands</label>
+                                                            <select name="prdBrand" class="w-100 p-2 border radius-input back2" id="prdBrand" required></select>
+                                                        </div>
+                                                        <div class="mb-3 col-4">
+                                                            <label for="prdStatus" class="form-label">Status</label>
+                                                            <select name="prdStatus" class="w-100 p-2 border radius-input back2" id="prdStatus" required></select>
+                                                        </div>
+                                                        <div class="mb-3 col-4">
+                                                            <label for="prdPrice" class="form-label">Price($)</label>
+                                                            <input type="text" class="w-100 p-2 border radius-input back2" id="prdPrice" name="prdPrice" required>
+                                                        </div>
+                                                        <div class="mb-3 col-4">
+                                                            <label for="prdDiscount" class="form-label">Discount(%)</label>
+                                                            <input type="text" min="0" max="100" class="w-100 p-2 border radius-input back2" id="prdDiscount" name="prdDiscount">
+                                                        </div>
+                                                        <div class="mb-3 col-4">
+                                                            <label for="prdMaterial" class="form-label">Material</label>
+                                                            <select name="prdMaterial" class="w-100 p-2 border radius-input back2" id="prdMaterial" required></select>
+                                                        </div>
+
+                                                        <div class="col-12 mb-2">
+                                                            <Label class="d-block bold">Product Image(jpg, jpeg, png)</Label>
+                                                            <div class="thumbnail mt-3 mb-3">
+                                                                <div class="btn-delThumbnail w-fit d-none d-inline-block">
+                                                                    <i class="fa-solid fa-xmark"></i>
+                                                                </div>
+                                                                <img alt="Thumbnail Image" class="d-none" width="300px">
+                                                            </div>
+                                                            <div>
+                                                                <label for="uploadFileEdit" class="upload"><i class="fa-solid fa-cloud-arrow-up"></i><span>Choose image</span></label>
+                                                                <input type="file" name="uploadFileEdit" id="uploadFileEdit" hidden>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12 mb-2">
+                                                            <label class="d-block bold" for="">Product Description</label>
+                                                            <textarea name="prdDescribeEdit" class="outline-unset select--focus border radius-input back2 w-100 p-2" id="prdDescribeEdit" cols="30" rows="15"></textarea>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-success" id="btn-editPrd" form="editForm">Save</button>
+                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" form="editForm">Cancle</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
 
                                     <div class="render-foot d-flex justify-content-between align-items-center mt-2">
                                         <div class="render-foot__view">
@@ -176,10 +210,7 @@
 
                                         <div class="render-page__foot__pagnigation d-flex align-items-center border radius-input">
                                             <div class="btn-prev p-2 page--disable">Previous</div>
-                                            <div class="page-lst d-flex align-items-center justify-content-between">
-                                                <span class="border-start border-end pt-2 pb-2 ps-3 pe-3 page--active">1</span>
-                                                <span class="border-start border-end pt-2 pb-2 ps-3 pe-3 hover-page">2</span>
-                                            </div>
+                                            <div class="page-lst d-flex align-items-center justify-content-between"></div>
                                             <div class="btn-next p-2 hover-page">Next</div>
                                         </div>
                                     </div>
@@ -187,7 +218,7 @@
                             </div>
                         </div>
 
-                        <div id="addprd-form">
+                        <div id="addprd-form" class="d-none">
                             <div class="addprd-form__title mb-4">
                                 <h1 class="pt-2 pb-2 border-2 border-bottom border-warning bold" style="font-size: 1.25rem;">Create a new product</h1>
                             </div>
@@ -207,7 +238,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <h1 class="bold mb-2">Enter category name</h1>
-                                                    <input type="text" class="border radius-input w-100 p-2 back2" name="new_cate">
+                                                    <div><input type="text" class="border radius-input w-100 p-2 back2" name="new_cate"></div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-success" id="btn-addCate">Save</button>
@@ -231,7 +262,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <h1 class="bold mb-2">Enter brand name</h1>
-                                                    <input type="text" class="border radius-input w-100 p-2 back2" name="new_brand" required>
+                                                    <div><input type="text" class="border radius-input w-100 p-2 back2" name="new_brand" required></div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-success" id="btn-addBrand">Save</button>
@@ -242,7 +273,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <button class="add_status btn btn-success" data-bs-toggle="modal" data-bs-target="#addStatusModal">
+                                    <button class="add_status btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#addStatusModal">
                                         <i class="fa-solid fa-folder-plus"></i>
                                         <span>Add status</span>
                                     </button>
@@ -255,10 +286,34 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <h1 class="bold mb-2">Enter status name</h1>
-                                                    <input type="text" class="border radius-input w-100 p-2 back2" name="new_status" required>
+                                                    <div><input type="text" class="border radius-input w-100 p-2 back2" name="new_status" required></div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-success" id="btn-addStatus">Save</button>
+                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancle</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button class="add_status btn btn-success" data-bs-toggle="modal" data-bs-target="#addMaterialModal">
+                                        <i class="fa-solid fa-folder-plus"></i>
+                                        <span>Add material</span>
+                                    </button>
+                                    <div class="modal fade" id="addMaterialModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-titlec bold" id="staticBackdropLabel" style="font-size: 20px;">Add a new material</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h1 class="bold mb-2">Enter material name</h1>
+                                                    <div><input type="text" class="border radius-input w-100 p-2 back2" name="new_material" required></div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success" id="btn-addMaterial">Save</button>
                                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancle</button>
                                                 </div>
                                             </div>
@@ -280,29 +335,25 @@
                                                 <input class="w-100 p-2 border radius-input back2" name="product_quantity" type="number" min="0" required>
                                             </div>
                                             <div class="input-fields__items col-3 mb-2">
-                                                <Label class="d-block bold">Quanlity(*)</Label>
+                                                <Label class="d-block bold">Quality(*)</Label>
                                                 <input class="w-100 p-2 border radius-input back2" name="product_quality" type="number" min="0" max="5" required>
                                             </div>
                                             <div class="input-fields__items col-3 mb-2">
                                                 <Label class="d-block bold" for="cate-fields">Categories</Label>
                                                 <select name="product_cate" id="cate-fields" class="w-100 p-2 border radius-input back2 select--focus outline-unset" required>
-                                                    <option value="">--Chọn danh mục--</option>
-                                                    <option value="">Quạt công nghiệp</option>
+                                                    <option value="">--Choose category--</option>
                                                 </select>
                                             </div>
                                             <div class="input-fields__items col-3 mb-2">
                                                 <Label class="d-block bold">Brands</Label>
                                                 <select name="product_brand" id="brand-fields" class="w-100 p-2 border radius-input back2 select--focus outline-unset" required>
-                                                    <option value="">--Chọn thương hiệu--</option>
-                                                    <option value="">Storm</option>
+                                                    <option value="">--Choose brand--</option>
                                                 </select>
                                             </div>
                                             <div class="input-fields__items col-3 mb-2">
                                                 <Label class="d-block bold">Status</Label>
                                                 <select name="product_status" id="status-fields" class="w-100 p-2 border radius-input back2 select--focus outline-unset" required>
-                                                    <option value="">--Chọn tình trạng--</option>
-                                                    <option value="">Còn hàng</option>
-                                                    <option value="">Hết hàng</option>
+                                                    <option value="">--Choose status--</option>
                                                 </select>
                                             </div>
                                             <div class="input-fields__items col-3 mb-2">
@@ -313,8 +364,14 @@
                                                 <Label class="d-block bold">Discount(%)</Label>
                                                 <input type="text" minlength="0" maxlength="100" class="w-100 p-2 border radius-input back2" name="product_discount">
                                             </div>
+                                            <div class="input-fields__items col-3 mb-2">
+                                                <Label class="d-block bold">Material</Label>
+                                                <select name="product_material" id="material-fields" class="w-100 p-2 border radius-input back2 select--focus outline-unset" required>
+                                                    <option value="">--Choose material--</option>
+                                                </select>
+                                            </div>
                                             <div class="input-fields__items col-12 mb-2">
-                                                <Label class="d-block bold">Product Image</Label>
+                                                <Label class="d-block bold">Product Image(jpg, jpeg, png)</Label>
                                                 <div class="thumbnail mt-3 mb-3">
                                                     <div class="btn-delThumbnail w-fit d-none d-inline-block">
                                                         <i class="fa-solid fa-xmark"></i>
@@ -322,19 +379,19 @@
                                                     <img alt="Thumbnail Image" class="d-none" width="300px">
                                                 </div>
                                                 <div>
-                                                    <label for="uploadFile" class=""><i class="fa-solid fa-cloud-arrow-up"></i><span>Choose image</span></label>
-                                                    <input type="file" name="uploadFile" id="uploadFile" hidden required>
+                                                    <label for="uploadFile" class="upload"><i class="fa-solid fa-cloud-arrow-up"></i><span>Choose image</span></label>
+                                                    <input type="file" name="uploadFile" id="uploadFile" hidden>
                                                 </div>
                                             </div>
 
                                             <div class="input-fields__items col-12 mb-2">
                                                 <label class="d-block bold" for="">Product Description</label>
-                                                <textarea name="product_describe" class="outline-unset select--focus border radius-input back2 w-100 p-2" id="" cols="30" rows="15" required></textarea>
+                                                <textarea name="product_describe" class="outline-unset select--focus border radius-input back2 w-100 p-2" id="product_describe" cols="30" rows="15"></textarea>
                                             </div>
 
                                             <div class="input-fields__items col-12 mb-2">
                                                 <button type="submit" class="btn btn-success">Save</button>
-                                                <div class="btn btn-danger">Cancle</div>
+                                                <div class="btn btn-danger btn-cancle">Cancle</div>
                                             </div>
                                         </div>
                                     </form>
@@ -347,6 +404,8 @@
         </div>
     </div>
 </body>
+<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
 <script src="./assets/js/bootstrap.min.js"></script>
+<script src="./assets/js/admin.js"></script>
 
 </html>

@@ -107,6 +107,20 @@ $(document).ready(function() {
         })
     })
 
+    $('.nav-item-contactUs').click((e) => {
+        e.preventDefault();
+        $('.header').addClass('headerAbout');
+        $.ajax({
+            url: './contact.html',
+            type: 'GET',
+            dataType: 'html',
+            success: function(data) {
+                window.scrollTo(0, 0);
+                $('.body').html(data);
+            }
+        })
+    })
+
     $('.btn-login').click((e) => {
         e.preventDefault();
         $('.header').addClass('headerAbout');

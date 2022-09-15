@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 26, 2022 at 09:18 AM
+-- Generation Time: Aug 28, 2022 at 04:08 AM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -32,6 +32,17 @@ CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `admin_name` int(11) NOT NULL,
   `admin_password` char(40) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brand`
+--
+
+CREATE TABLE `brand` (
+  `id` int(11) NOT NULL,
+  `brand_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -123,7 +134,8 @@ CREATE TABLE `product` (
   `product_cate` int(11) NOT NULL,
   `product_avt` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `product_discount` int(11) NOT NULL,
-  `product_status` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+  `product_status` int(11) NOT NULL,
+  `product_describe` varchar(8000) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -141,6 +153,17 @@ CREATE TABLE `productdetails` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `status`
+--
+
+CREATE TABLE `status` (
+  `id` int(11) NOT NULL,
+  `status_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -149,7 +172,7 @@ CREATE TABLE `user` (
   `user_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `user_password` char(40) COLLATE utf8_unicode_ci NOT NULL,
   `user_email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `user_phone` char(10) COLLATE utf8_unicode_ci NOT NULL,
+  `user_phone` char(20) COLLATE utf8_unicode_ci NOT NULL,
   `user_avt` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `user_address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `user_fullname` varchar(100) COLLATE utf8_unicode_ci NOT NULL
@@ -161,7 +184,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `user_name`, `user_password`, `user_email`, `user_phone`, `user_avt`, `user_address`, `user_fullname`) VALUES
 (1, 'HuynhDuc1909', '7c222fb2927d828af22f592134e8932480637c0d', 'ducleader2003@gmail.com', '1111111111', NULL, 'Việt Nam', 'phạm huỳnh đức'),
-(2, 'Duc123', 'a642a77abd7d4f51bf9226ceaf891fcbb5b299b8', 'duc.ph.2045@aptechlearning.edu.vn', '396345593', NULL, 'Việt Nam', 'Phạm Huỳnh Đức');
+(2, 'Duc123', 'a642a77abd7d4f51bf9226ceaf891fcbb5b299b8', 'duc.ph.2045@aptechlearning.edu.vn', '396345593', NULL, 'Việt Nam', 'Phạm Huỳnh Đức'),
+(13, 'ducleader', 'f638e2789006da9bb337fd5689e37a265a70f359', 'ducleader2003@gmail', '0396345593', NULL, 'Việt Nam', 'phạm huỳnh đức'),
+(15, 'triu1977', 'a642a77abd7d4f51bf9226ceaf891fcbb5b299b8', 'triu1977@gmail.com', '0967167338', NULL, 'Việt Nam', 'Phạm Công Trìu');
 
 -- --------------------------------------------------------
 
@@ -187,6 +212,13 @@ CREATE TABLE `user_order` (
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `adminName` (`admin_name`);
+
+--
+-- Indexes for table `brand`
+--
+ALTER TABLE `brand`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `brand_name` (`brand_name`);
 
 --
 -- Indexes for table `categories`
@@ -230,7 +262,9 @@ ALTER TABLE `orderdetails`
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `productName` (`product_name`),
-  ADD KEY `cate_id` (`product_cate`);
+  ADD KEY `cate_id` (`product_cate`),
+  ADD KEY `product_brand` (`product_brand`),
+  ADD KEY `product_status` (`product_status`);
 
 --
 -- Indexes for table `productdetails`
@@ -238,6 +272,13 @@ ALTER TABLE `product`
 ALTER TABLE `productdetails`
   ADD PRIMARY KEY (`id`),
   ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `status`
+--
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `status_name` (`status_name`);
 
 --
 -- Indexes for table `user`
@@ -263,6 +304,12 @@ ALTER TABLE `user_order`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `brand`
+--
+ALTER TABLE `brand`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -308,10 +355,16 @@ ALTER TABLE `productdetails`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `status`
+--
+ALTER TABLE `status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `user_order`
@@ -353,7 +406,9 @@ ALTER TABLE `orderdetails`
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`product_cate`) REFERENCES `categories` (`id`);
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`product_cate`) REFERENCES `categories` (`id`),
+  ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`product_brand`) REFERENCES `brand` (`id`),
+  ADD CONSTRAINT `product_ibfk_3` FOREIGN KEY (`product_status`) REFERENCES `status` (`id`);
 
 --
 -- Constraints for table `productdetails`

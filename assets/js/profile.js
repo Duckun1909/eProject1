@@ -1,9 +1,6 @@
 $(document).ready(function() {
-    console.log($('#editUserForm input'))
-
     $.post('./profile.php', {}, function(res) {
         var userInfor = JSON.parse(res);
-        console.log(userInfor)
         var inputLst = $('#editUserForm input');
         $(inputLst[0]).val(userInfor.user_name);
         $(inputLst[1]).val(userInfor.user_email);
