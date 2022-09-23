@@ -1,31 +1,32 @@
-$(document).ready(function() {
-    $('.sidebar-body ul li').click(function() {
-        $(this).addClass('sidebar-body--active ').siblings().removeClass('sidebar-body--active ');
-        index = $('.sidebar-body ul li').toArray().indexOf(this);
-        if (index == 1) {
-            $('#prd-form').removeClass('d-none').siblings().addClass('d-none');
-        }
-    })
+import checkDuplicateForm from './checkDuplicate.js'
 
-    var thumbnailHandle = function(nameQuery, formID) {
-        $(nameQuery).on('change', function() {
-            readURL(this, `${formID} .thumbnail img`, `${formID} .btn-delThumbnail`)
-        })
-        var removeThumbnail = function(formID) {
-            $(`${formID} .thumbnail img`).removeAttr('src');
-            $(`${formID} .thumbnail img`).addClass('d-none');
-            $(`${formID} .btn-delThumbnail`).addClass('d-none');
+var myApp = angular.module('myApp', [])
+myApp.controller('inCludePage', function($scope) {
+    $scope.elementUrl = './dashboard.html'
+    $scope.includeHandle = function(index) {
+        switch (index) {
+            case 0:
+                this.elementUrl = './dashboard.html'
+                break;
+            case 1:
+                this.elementUrl = './prdManage.html';
+                break;
+            case 2:
+                this.elementUrl = './cusManage.html';
+                break
+            case 3:
+                this.elementUrl = './orderManage.html';
+                break;
+            case 4:
+                this.elementUrl = './possesManage.html';
+                break;
+            case 5:
+                this.elementUrl = './createAdmin.html';
         }
-        removeThumbnail(formID)
-        $(`${formID} .btn-delThumbnail`).click(function() {
-            removeThumbnail(formID);
-        })
     }
-    thumbnailHandle('input#uploadFile', '#addPrdForm')
-    thumbnailHandle('input#uploadFileEdit', '#editForm')
-
-    // Show add product form
-    $('.btn-addprd').click(() => {
+}).controller('crudUser', function($scope) {
+    // Show add user form
+    $('.btn-add').click(() => {
         $('#prd-form').addClass('d-none').siblings().removeClass('d-none');
     })
 
@@ -33,81 +34,27 @@ $(document).ready(function() {
         $('#prd-form').removeClass('d-none').siblings().addClass('d-none');
     })
 
+    // thumbnail image
+    thumbnailHandle('input#uploadFile', '#addForm')
+    thumbnailHandle('input#uploadFileEdit', '#editForm')
 
-    // Render select value
-    var renderSelect = function(nameSelect, nameType) {
-        $.post('admin.php', { renderSelect: `${nameType}` }, function(res) {
-            row = JSON.parse(res);
-            $(nameSelect).children().toArray().forEach((elm, index) => {
-                if (index > 0) {
-                    elm.remove();
-                }
-            })
-            row.forEach(element => {
-                $(nameSelect).append(`<option value=${element[0]}>${element[1]}</option>`);
-            });
-        })
-    }
-    renderSelect('#cate-fields', 'cate');
-    renderSelect('#brand-fields', 'brand');
-    renderSelect('#status-fields', 'status');
-    renderSelect('#material-fields', 'material');
-    renderSelect('#prdCate', 'cate');
-    renderSelect('#prdBrand', 'brand');
-    renderSelect('#prdStatus', 'status');
-    renderSelect('#prdMaterial', 'material');
+    // checkFormData
+    checkDuplicateForm('#addForm input[name="username"]', 'Username was existed', 'username', 1, 'register.php')
+    checkDuplicateForm('#addForm input[name="email"]', 'Email was existed', 'email', 1, 'register.php')
+    checkDuplicateForm('#addForm input[name="phone"]', 'Phone was existed', 'phone', 1, 'register.php')
+    checkDuplicateForm('#addForm input[name="password"]', 0, "register.php")
+    checkDuplicateForm('#addForm input[name="fullname"]', 0, "register.php")
+    checkDuplicateForm('#addForm input[name="address"]', 0, "register.php")
 
-    // Add value select
-    var addPrdSelect = function(nameClick, nameInput, nameType, nameSelect) {
-        let checkAdd = 0;
-        $(nameClick).click(function(e) {
-            valItem = $(nameInput).val();
-            if (valItem == '' && checkAdd == 0) {
-                $(nameInput).parent().append('<div style="color:red;">This field can not empty!</div>')
-                $(nameInput).removeAttr('style').addClass('border')
-                checkAdd = 1;
-            } else if (valItem != '') {
-                $(nameInput).siblings('div').remove();
-                $(nameInput).removeClass('border').css('border', '1px solid #7fffd4');
-                checkAdd = 0;
 
-                $.post('admin.php', { addPrdSelect: nameType, name: valItem }, function(res) {
-                    switch (res) {
-                        case 'cate':
-                            alert('Add category succcesfully');
-                            $(nameInput).val('');
-                            break;
-                        case 'brand':
-                            alert('Add brand succcesfully');
-                            $(nameInput).val('');
-                            break;
-                        case 'status':
-                            alert('Add status succcesfully');
-                            $(nameInput).val('');
-                            break;
-                        case 'material':
-                            alert('Add material succcesfully');
-                            $(nameInput).val('');
-                            break;
-                    }
-
-                    renderSelect(nameSelect, nameType)
-                })
-            }
-        })
-    }
-    addPrdSelect('button#btn-addCate', 'input[name="new_cate"]', 'cate', '#cate-fields');
-    addPrdSelect('button#btn-addBrand', 'input[name="new_brand"]', 'brand', '#brand-fields')
-    addPrdSelect('button#btn-addStatus', 'input[name="new_status"]', 'status', '#status-fields')
-    addPrdSelect('button#btn-addMaterial', 'input[name="new_material"]', 'material', '#material-fields')
-
-    // Add product
-    $('#addPrdForm').submit(function(e) {
+    // Add user
+    $('#addForm').submit(function(e) {
         e.preventDefault();
         var data = new FormData(this)
-        data.append('addPrd', 'true');
+        data.append('addUser', 'true');
+        console.log(data.get('username'))
         $.ajax({
-            url: './admin.php',
+            url: './cusManage.php',
             type: 'POST',
             async: false,
             data: data,
@@ -117,13 +64,13 @@ $(document).ready(function() {
                 console.log(res)
                 switch (res) {
                     case '23000':
-                        alert('Tên sản phẩm đã tồn tại vui lòng nhập tên khác!');
+                        alert('Có giá trị đã tồn tại, vui lòng kiểm tra lại!');
                         break;
                     case '1':
                         alert('Thêm sản phẩm thành công!');
-                        $('#addPrdForm')[0].reset()
-                        thumbnailHandle('', '#addPrdForm')
-                        $('#addPrdForm .nicEdit-main')[0].innerText = '';
+                        $('#addForm')[0].reset()
+                        thumbnailHandle('', '#addForm')
+                        $('#addForm input').removeClass('border-success');
                         removePrd();
                         checkInputAll();
                         getPrdToEdit();
@@ -137,332 +84,74 @@ $(document).ready(function() {
         })
     })
 
-    // Remove product
-    var removePrd = function() {
-        $('.trash').click(function() {
-            prdID = $(this).parents('tr').attr('id');
-            pathImg = $(this).parents('td').siblings('.prd-img').children('img').attr('src')
-            confirmDel = confirm('Are you sure you want to remove this product?');
-            if (confirmDel == true) {
-                $.post('admin.php', { delPrd: 'true', id: prdID, path: pathImg }, function(res) {
-                    if (res == 1) {
-                        $('.render-table table tbody').children(`tr#${prdID}`).remove()
-                    } else if (res == 0) {
-                        alert('Delete product failed!');
-                    }
-                })
-            }
-        })
-    }
-
-
-    // Remove product by check input
-    var checkInputAll = function() {
-        $('input[name="checkAll"]').click(function() {
-            if ($(this).is(':checked')) {
-                $('.prd-check input').each((index, val) => {
-                    val.checked = true;
-                })
-            } else {
-                $('.prd-check input').each((index, val) => {
-                    val.checked = false;
-                })
-            }
-        })
-    }
-
-    var removePrdCheck = function() {
-        $('.btn-delprd').click(function() {
-            let checkArr = new Array();
-            let imgArr = new Array();
-            $('.prd-check input').each((index, val) => {
-                if ($(val).is(':checked')) {
-                    checkArr.push($(val).parents('tr').attr('id'));
-                    imgArr.push($(val).parent().siblings('.prd-img').children('img').attr('src'))
+    // remove user
+    $scope.removeHandle = function(id, pathImg) {
+        let check = confirm('Are you sure you want to delete this user?')
+        if (check) {
+            $.post('./cusManage.php', { removeUser: true, id: id, path: pathImg }, function(res) {
+                if (res == 1) {
+                    alert('Remove user successfully!')
+                } else if (res == 0) {
+                    alert('Remove user failed!')
                 }
             })
-
-            if (checkArr.length != 0) {
-                checkConfirm = confirm('Are you sure you want to remove products above?');
-                if (checkConfirm) {
-                    $.post('admin.php', { removeAll: true, removeArr: checkArr, imgArr: imgArr }, function(res) {
-                        if (res == 1) {
-                            $('input[name="checkAll"]')[0].checked = false;
-                            $(checkArr).each((index, val) => {
-                                $('.render-table table tbody').children(`tr#${val}`).remove()
-                            })
-
-                            pagingPrd(cur_page, record_inPage, { getTotalPrd: true }, 'n');
-                        } else if (res == 0) {
-                            alert('Delete product failed!');
-                        }
-                    })
-                }
-            }
-        })
-    }
-    removePrdCheck();
-
-    // Modify product
-    let oldPath;
-    let prdID;
-    var renderEditForm = function(prdID) {
-        prdID = prdID
-        $.post('admin.php', { getPrd: true, prdID: prdID }, function(res) {
-            row = JSON.parse(res)[0];
-            $('#editForm').data('id', row.id)
-            $('#prdName').val(row.product_name)
-            $('#prdQuantity').val(row.product_quantity)
-            $('#prdQuality').val(row.product_quality)
-            $('#prdCate').children().each((index, val) => {
-                if ($(val).val() == row.product_cate) $(val)[0].selected = true;
-            })
-            $('#prdBrand').children().each((index, val) => {
-                if ($(val).val() == row.product_brand) $(val)[0].selected = true;
-            })
-            $('#prdStatus').children().each((index, val) => {
-                if ($(val).val() == row.product_status) $(val)[0].selected = true;
-            })
-            $('#prdMaterial').children().each((index, val) => {
-                if ($(val).val() == row.product_material) $(val)[0].selected = true;
-            })
-            $('#prdPrice').val(row.product_price)
-            $('#prdDiscount').val(row.product_discount)
-            $('#editForm .thumbnail img').removeClass('d-none').attr('src', row.product_avt).siblings().removeClass('d-none')
-            oldPath = $('#editForm .thumbnail img').attr('src');
-            $('#editForm .nicEdit-main')[0].innerText = row.product_describe
-            $('#prdDescribeEdit').val(row.product_describe)
-        })
-    }
-    var getPrdToEdit = function() {
-        $('button.edit').click(function() {
-            let id = $(this).parents('tr').attr('id');
-            renderEditForm(id)
-        })
-    }
-
-    $('#editForm').submit(function(e) {
-        e.preventDefault();
-        var data = new FormData(this);
-        let id = $(this).data('id');
-        data.append('editPrd', true);
-        data.append('prdID', $(this).data('id'))
-        data.append('path', oldPath);
-        $.ajax({
-            url: './admin.php',
-            type: 'POST',
-            data: data,
-            processData: false,
-            contentType: false,
-            success: function(res) {
-                if (res == 0) {
-                    alert('Cập nhật thông tin sản phẩm thất bại!')
-                } else if (res == 2) {
-                    alert('Lỗi upload file ảnh do ảnh đã tồn tại, định dạng không đúng...');
-                } else {
-                    alert('Cập nhật thông tin sản phẩm thành công!')
-                    renderEditForm(id)
-                    $('#uploadFileEdit').val(null)
-                    pagingPrd(cur_page, record_inPage, { getTotalPrd: true }, 'n');
-                }
-            }
-        })
-    })
-
-    // Search product
-    let searchVal = '';
-    $('#admin-prdSearch').keyup(function(e) {
-        searchVal = $(this).val();
-        if (searchVal == '') {
-            pagingPrd(cur_page, record_inPage, { getTotalPrd: true }, 'n');
-            pagingBtn(cur_page)
-
-        } else {
-            cur_page = 1;
-            pagingPrd(cur_page, record_inPage, { getTotalPrdSearch: true, searchVal: searchVal }, 's');
-            pagingBtn(cur_page)
         }
-    })
+    }
 
-    // Render product to table
-    var renderPrd = function(nameQuery, option, data) {
+
+
+    // Render user to table
+    var renderUser = function() {
         $.ajax({
-            url: './admin.php',
+            url: './cusManage.php',
             type: 'POST',
             cache: false,
-            async: option,
+            async: false,
             dataType: 'json',
-            data: data,
+            data: { getUserInPage: true },
             success: function(res) {
-                row = res;
-                $(nameQuery).children('tr').remove();
-                row.forEach((elm, index) => {
-                    $(nameQuery).append(`
-                            <tr id="${elm.id}">
-                                <td class="p-2 border prd-check text-center"><input type="checkbox"></td>
-                                <td class="p-2 border prd-code">${elm.id}</td>
-                                <td class="p-2 border prd-name">${elm.product_name}</td>
-                                <td class="p-2 border prd-img"><img src="${elm.product_avt}" width="20%" alt=""></td>
-                                <td class="p-2 border prd-quantity">${elm.product_quantity}</td>
-                                <td class="p-2 border prd-status">
-                                    <div><span>${elm.status_name}</span></div>
-                                </td>
-                                <td class="p-2 border prd-price">${'$' + elm.product_price}</td>
-                                <td class="p-2 border prd-cate">${elm.cate_name}</td>
-                                <td class="p-2 border prd-options" style="white-space:nowrap;">
-                                    <button class="trash pt-1 pb-1 ps-2 pe-2 border radius-input btn--active">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </button>
-                                    <button class="edit pt-1 pb-1 ps-2 pe-2 border radius-input btn--active" data-bs-toggle="modal" data-bs-target="#EditPrdModal">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        `)
-                })
-
+                $scope.userArr = res
             }
         })
-        removePrd();
-        checkInputAll();
-        getPrdToEdit();
-    }
 
+        // removePrd();
+        // checkInputAll();
+        // getPrdToEdit();
+    }
+    renderUser()
 
     // Pagination
-    let record_inPage = $('select[name="tabLength"]').val();
-    let total_record;
-    let total_page;
-    let cur_page = 1;
-    let start;
-    let limit;
-
-    var pagingPrd = function(cur_page, record_inPage, dataTotalRecord, mode) {
-        $.ajax({
-            url: './admin.php',
-            type: 'POST',
-            async: false,
-            data: dataTotalRecord,
-            dataType: 'text',
-            success: function(res) {
-                total_record = res
-            }
-        })
-
-        total_page = Math.ceil(total_record / record_inPage);
-        $('.page-lst').children().remove()
-        for (let i = 1; i <= total_page; i++) {
-            if (i == cur_page) {
-                $('.page-lst').append(`<span class = "border-start border-end pt-2 pb-2 ps-3 pe-3 page--active" >${i}`)
-            } else {
-                $('.page-lst').append(`<span class = "border-start border-end pt-2 pb-2 ps-3 pe-3 hover-page" >${i}`)
-            }
-        }
-
-        start = record_inPage * (cur_page - 1);
-        limit = cur_page * record_inPage;
-        switch (mode) {
-            case 's':
-                renderPrd('.render-table table tbody', false, { searchPrd: true, searchVal: searchVal, start: start, limit: limit });
-                break;
-            case 'n':
-                renderPrd('.render-table table tbody', false, { getPrdInPage: true, start: start, limit: limit });
-        }
-        let countPrdInPage = $('.render-foot__view span');
-        countPrdInPage[0].innerText = start + 1;
-        countPrdInPage[1].innerText = total_record >= limit ? limit : total_record
-        countPrdInPage[2].innerText = total_record
-
+    $scope.curPage = 1
+    $scope.recordInPage = 10;
+    $scope.start = $scope.recordInPage * ($scope.curPage - 1) + 1
+    $scope.limit = $scope.curPage * $scope.recordInPage
+    $scope.totalRecord = $scope.userArr.length
+    let total = Math.ceil($scope.totalRecord / $scope.recordInPage)
+    let range = []
+    for (let i = 1; i <= total; i++) {
+        range.push(i);
     }
-    pagingPrd(cur_page, record_inPage, { getTotalPrd: true }, 'n');
+    $scope.totalPage = range
 
-    $('select[name="tabLength"]').change(function(e) {
-        record_inPage = $(this).val();
-        if (record_inPage > total_record) {
-            cur_page = 1;
-        }
-        if (searchVal != '') {
-            pagingPrd(cur_page, record_inPage, { getTotalPrdSearch: true, searchVal: searchVal }, 's');
-        } else {
-            pagingPrd(cur_page, record_inPage, { getTotalPrd: true }, 'n');
-        }
-        pagingBtn(cur_page)
-    })
-
-    var pagingBtn = function(cur_page) {
-        if (cur_page > 1 && cur_page < total_page) {
-            $('.render-page__foot__pagnigation .btn-prev, .render-page__foot__pagnigation .btn-next').addClass('hover-page').removeClass('page--disable')
-        } else {
-            if (cur_page == 1) {
-                $('.render-page__foot__pagnigation .btn-prev').addClass('page--disable').removeClass('hover-page')
-                $('.render-page__foot__pagnigation .btn-next').addClass('hover-page').removeClass('page--disable')
-            }
-            if (cur_page == total_page) {
-                $('.render-page__foot__pagnigation .btn-next').addClass('page--disable').removeClass('hover-page')
-                $('.render-page__foot__pagnigation .btn-prev').addClass('hover-page').removeClass('page--disable')
-            }
-            if (cur_page == 1 && cur_page == total_page) {
-                $('.render-page__foot__pagnigation .btn-prev').addClass('page--disable').removeClass('hover-page')
-                $('.render-page__foot__pagnigation .btn-next').addClass('page--disable').removeClass('hover-page')
-            }
-        }
-
+    if ($scope.totalRecord < $scope.limit) {
+        $scope.limit = $scope.totalRecord
     }
-    pagingBtn(cur_page)
 
-    var pagingHandle = function() {
-        $('.render-page__foot__pagnigation .btn-next').click(function() {
-            if (cur_page < total_page) {
-                cur_page = $('.page-lst').find('.page--active').next()[0].innerText
-                $('.page-lst').find('.page--active').removeClass('page--active').next().addClass('page--active')
-                pagingBtn(cur_page);
-                if (searchVal == '') {
-                    pagingPrd(cur_page, record_inPage, { getTotalPrd: true }, 'n');
-                } else {
-                    pagingPrd(cur_page, record_inPage, { getTotalPrdSearch: true, searchVal: searchVal }, 's');
-                }
-            }
-        })
-
-        $('.render-page__foot__pagnigation .btn-prev').click(function() {
-            if (cur_page > 1) {
-                cur_page = $('.page-lst').find('.page--active').prev()[0].innerText
-                $('.page-lst').find('.page--active').removeClass('page--active').prev().addClass('page--active')
-                pagingBtn(cur_page);
-                if (searchVal == '') {
-                    pagingPrd(cur_page, record_inPage, { getTotalPrd: true }, 'n');
-                } else {
-                    pagingPrd(cur_page, record_inPage, { getTotalPrdSearch: true, searchVal: searchVal }, 's');
-                }
-            }
-        })
-
-        $('.page-lst').click(function(e) {
-            $(e.target).addClass('page--active').removeClass('hover-page').siblings().addClass('hover-page').removeClass('page--active')
-            cur_page = $(e.target)[0].innerText
-            pagingBtn(cur_page);
-            if (searchVal == '') {
-                pagingPrd(cur_page, record_inPage, { getTotalPrd: true }, 'n');
-            } else {
-                pagingPrd(cur_page, record_inPage, { getTotalPrdSearch: true, searchVal: searchVal }, 's');
-            }
-        })
+    $scope.pagingHandle = function(cur_page) {
+        $scope.curPage = cur_page
+        console.log(cur_page)
     }
-    pagingHandle()
 
 
 })
 
-// Trình soạn thảo văn bản
-bkLib.onDomLoaded(function() {
-    new nicEditor().panelInstance('product_describe')
-    new nicEditor().panelInstance('prdDescribeEdit')
-    $('.nicEdit-panelContain').parent().width('100%');
-    $('.nicEdit-panelContain').parent().next().width('98%');
-    $('.nicEdit-panelContain').parent().next().children('.nicEdit-main').width('100%').css('min-height', '90px').addClass('ps-2 m-0')
-
-}); // chuyển thẻ texterea với id product_describe thành trình soạn thảo văn bản
-
+$('.sidebar-body ul li').click(function() {
+    $(this).addClass('sidebar-body--active ').siblings().removeClass('sidebar-body--active ');
+    let index = $('.sidebar-body ul li').toArray().indexOf(this);
+    if (index == 1) {
+        $('#prd-form').removeClass('d-none').siblings().addClass('d-none');
+    }
+})
 
 function readURL(input, thumbimage, thumbnailBtn) {
     if (input.files && input.files[0]) {
@@ -475,4 +164,19 @@ function readURL(input, thumbimage, thumbnailBtn) {
         }
         reader.readAsDataURL(input.files[0]);
     }
+}
+
+var thumbnailHandle = function(nameQuery, formID) {
+    $(nameQuery).on('change', function() {
+        readURL(this, `${formID} .thumbnail img`, `${formID} .btn-delThumbnail`)
+    })
+    var removeThumbnail = function(formID) {
+        $(`${formID} .thumbnail img`).removeAttr('src');
+        $(`${formID} .thumbnail img`).addClass('d-none');
+        $(`${formID} .btn-delThumbnail`).addClass('d-none');
+    }
+    removeThumbnail(formID)
+    $(`${formID} .btn-delThumbnail`).click(function() {
+        removeThumbnail(formID);
+    })
 }

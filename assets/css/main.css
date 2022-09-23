@@ -55,6 +55,18 @@ input {
     color: #fff;
 }
 
+.txt-line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @keyframes rotatePerspectiveIn {
     to {
         opacity: 1;

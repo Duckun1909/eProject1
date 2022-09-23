@@ -1,20 +1,20 @@
 <div class="slider">
-    <div id="carouselExampleIndicators" data-bs-interval="3000"  class="carousel slide" data-bs-ride="carousel">
+    <div id="carouselExampleIndicators" data-bs-interval="3000" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-        <div class="carousel-inner"style="max-height:750px;">
-          <div class="carousel-item active">
-            <img src="./assets/img/slide1.jpg" class="d-block w-100" width="100%" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="./assets/img/slide2.jpg" class="d-block w-100" width="100%" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="./assets/img/slide3.jpg" class="d-block w-100" width="100%" alt="...">
-          </div>
+        <div class="carousel-inner" style="max-height:750px;">
+            <div class="carousel-item active">
+                <img src="./assets/img/slide1.jpg" class="d-block w-100" width="100%" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="./assets/img/slide2.jpg" class="d-block w-100" width="100%" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="./assets/img/slide3.jpg" class="d-block w-100" width="100%" alt="...">
+            </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -24,12 +24,12 @@
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
-      </div>
+    </div>
 </div>
 
-<div class="container mb-5">
+<div class="container mb-5" ng-controller="renderPrd">
     <div class="body-cate">
-        <div class="body-cate__industrialFan">
+        <div class="">
             <div class="body-cate__Fan mb-5">
                 <div class="body-cate__Fan-title border-bottom position-relative">
                     Quạt công nghiệp
@@ -37,14 +37,14 @@
 
                 <div class="body-cate__Fan-items">
                     <div class="row">
-                        <div class="col-3 mb-3">
+                        <div class="col-3 mb-3" ng-repeat="val in product | subCate:1 | limitTo:4">
                             <div class="border hover-scale-img position-relative">
                                 <div class="items-discount">
                                     <div>
-                                        <span class="percent">20%</span>
+                                        <span class="percent">{{val.product_discount}}%</span>
                                         <span class="reduce">GIẢM</span>
                                     </div>
-                                </div>   
+                                </div>
                                 <div class="item-avt overflow-hidden position-relative">
                                     <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
                                     <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
@@ -54,228 +54,13 @@
                                     </div>
                                 </div>
                                 <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
+                                    <p class="text-center hover_link txt-line-clamp" ng-click="includeHandle(8)">{{val.product_name}}
+                                    </p>
+                                    <div class=" d-flex align-items-center justify-content-between mt-3">
                                         <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                        </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                            <i class="fa-regular fa-square-plus"></i>
-                                            <span>Add to cart</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
-                                    <div>
-                                        <span class="percent">20%</span>
-                                        <span class="reduce">GIẢM</span>
-                                    </div>
-                                </div>   
-                                <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                    <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                        <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                    </div>
-                                </div>
-                                <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                        </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                            <i class="fa-regular fa-square-plus"></i>
-                                            <span>Add to cart</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
-                                    <div>
-                                        <span class="percent">20%</span>
-                                        <span class="reduce">GIẢM</span>
-                                    </div>
-                                </div>   
-                                <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                    <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                        <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                    </div>
-                                </div>
-                                <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                        </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                            <i class="fa-regular fa-square-plus"></i>
-                                            <span>Add to cart</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
-                                    <div>
-                                        <span class="percent">20%</span>
-                                        <span class="reduce">GIẢM</span>
-                                    </div>
-                                </div>   
-                                <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                    <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                        <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                    </div>
-                                </div>
-                                <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                        </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                            <i class="fa-regular fa-square-plus"></i>
-                                            <span>Add to cart</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
-                                    <div>
-                                        <span class="percent">20%</span>
-                                        <span class="reduce">GIẢM</span>
-                                    </div>
-                                </div>   
-                                <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                    <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                        <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                    </div>
-                                </div>
-                                <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                        </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                            <i class="fa-regular fa-square-plus"></i>
-                                            <span>Add to cart</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
-                                    <div>
-                                        <span class="percent">20%</span>
-                                        <span class="reduce">GIẢM</span>
-                                    </div>
-                                </div>   
-                                <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                    <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                        <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                    </div>
-                                </div>
-                                <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                        </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                            <i class="fa-regular fa-square-plus"></i>
-                                            <span>Add to cart</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
-                                    <div>
-                                        <span class="percent">20%</span>
-                                        <span class="reduce">GIẢM</span>
-                                    </div>
-                                </div>   
-                                <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                    <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                        <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                    </div>
-                                </div>
-                                <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                        </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                            <i class="fa-regular fa-square-plus"></i>
-                                            <span>Add to cart</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
-                                    <div>
-                                        <span class="percent">20%</span>
-                                        <span class="reduce">GIẢM</span>
-                                    </div>
-                                </div>   
-                                <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                    <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                        <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                    </div>
-                                </div>
-                                <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
+                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$1000</div>
+                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">{{val.product_price | currency: '$':0}}
+                                            </div>
                                         </div>
                                         <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
                                             <i class="fa-regular fa-square-plus"></i>
@@ -290,11 +75,11 @@
             </div>
         </div>
 
-        <div class="body-cate__standFan">
-            <div class="banner banner-1">
-                <img src="./assets/img/banner-1.jpg" width="100%" alt="">
-            </div>
+        <div class="banner banner-1">
+            <img src="./assets/img/banner-1.jpg" width="100%" alt="">
+        </div>
 
+        <div class="">
             <div class="body-cate__Fan mb-5">
                 <div class="body-cate__Fan-title border-bottom position-relative">
                     Quạt đứng
@@ -302,14 +87,14 @@
 
                 <div class="body-cate__Fan-items">
                     <div class="row">
-                        <div class="col-3 mb-3">
+                        <div class="col-3 mb-3" ng-repeat="val in product | subCate:2 | limitTo:4">
                             <div class="border hover-scale-img position-relative">
                                 <div class="items-discount">
                                     <div>
-                                        <span class="percent">20%</span>
+                                        <span class="percent">{{val.product_discount}}%</span>
                                         <span class="reduce">GIẢM</span>
                                     </div>
-                                </div>   
+                                </div>
                                 <div class="item-avt overflow-hidden position-relative">
                                     <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
                                     <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
@@ -319,11 +104,13 @@
                                     </div>
                                 </div>
                                 <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
+                                    <p class="text-center hover_link txt-line-clamp" ng-click="includeHandle(8)">{{val.product_name}}
+                                    </p>
+                                    <div class=" d-flex align-items-center justify-content-between mt-3">
                                         <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
+                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$1000</div>
+                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">{{val.product_price | currency: '$':0}}
+                                            </div>
                                         </div>
                                         <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
                                             <i class="fa-regular fa-square-plus"></i>
@@ -333,110 +120,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-3 mb-3">
-                            <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
-                                    <div>
-                                        <span class="percent">20%</span>
-                                        <span class="reduce">GIẢM</span>
-                                    </div>
-                                </div>   
-                                <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                    <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                        <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                    </div>
-                                </div>
-                                <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                        </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                            <i class="fa-regular fa-square-plus"></i>
-                                            <span>Add to cart</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
-                                    <div>
-                                        <span class="percent">20%</span>
-                                        <span class="reduce">GIẢM</span>
-                                    </div>
-                                </div>   
-                                <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                    <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                        <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                    </div>
-                                </div>
-                                <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                        </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                            <i class="fa-regular fa-square-plus"></i>
-                                            <span>Add to cart</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
-                                    <div>
-                                        <span class="percent">20%</span>
-                                        <span class="reduce">GIẢM</span>
-                                    </div>
-                                </div>   
-                                <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                    <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                        <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                    </div>
-                                </div>
-                                <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                        </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                            <i class="fa-regular fa-square-plus"></i>
-                                            <span>Add to cart</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="body-cate__ceilingFan">
-            <div class="banner banner-2">
-                <img src="./assets/img/banner-2.jpg" width="100%" alt="">
-            </div>
+        <div class="banner banner-2">
+            <img src="./assets/img/banner-2.jpg" width="100%" alt="">
+        </div>
 
+        <div class="">
             <div class="body-cate__Fan mb-5">
                 <div class="body-cate__Fan-title border-bottom position-relative">
                     Quạt đảo trần
@@ -444,14 +137,14 @@
 
                 <div class="body-cate__Fan-items">
                     <div class="row">
-                        <div class="col-3 mb-3">
+                        <div class="col-3 mb-3" ng-repeat="val in product | subCate:3 | limitTo:4">
                             <div class="border hover-scale-img position-relative">
                                 <div class="items-discount">
                                     <div>
-                                        <span class="percent">20%</span>
+                                        <span class="percent">{{val.product_discount}}%</span>
                                         <span class="reduce">GIẢM</span>
                                     </div>
-                                </div>   
+                                </div>
                                 <div class="item-avt overflow-hidden position-relative">
                                     <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
                                     <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
@@ -461,11 +154,13 @@
                                     </div>
                                 </div>
                                 <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
+                                    <p class="text-center hover_link txt-line-clamp" ng-click="includeHandle(8)">{{val.product_name}}
+                                    </p>
+                                    <div class=" d-flex align-items-center justify-content-between mt-3">
                                         <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
+                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$1000</div>
+                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">{{val.product_price | currency: '$':0}}
+                                            </div>
                                         </div>
                                         <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
                                             <i class="fa-regular fa-square-plus"></i>
@@ -475,110 +170,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-3 mb-3">
-                            <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
-                                    <div>
-                                        <span class="percent">20%</span>
-                                        <span class="reduce">GIẢM</span>
-                                    </div>
-                                </div>   
-                                <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                    <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                        <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                    </div>
-                                </div>
-                                <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                        </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                            <i class="fa-regular fa-square-plus"></i>
-                                            <span>Add to cart</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
-                                    <div>
-                                        <span class="percent">20%</span>
-                                        <span class="reduce">GIẢM</span>
-                                    </div>
-                                </div>   
-                                <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                    <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                        <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                    </div>
-                                </div>
-                                <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                        </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                            <i class="fa-regular fa-square-plus"></i>
-                                            <span>Add to cart</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
-                                    <div>
-                                        <span class="percent">20%</span>
-                                        <span class="reduce">GIẢM</span>
-                                    </div>
-                                </div>   
-                                <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                    <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                        <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                    </div>
-                                </div>
-                                <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                        </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                            <i class="fa-regular fa-square-plus"></i>
-                                            <span>Add to cart</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="body-cate__floorFan">
-            <div class="banner banner-3">
-                <img src="./assets/img/banner-3.jpg" width="100%" alt="">
-            </div>
+        <div class="banner banner-3">
+            <img src="./assets/img/banner-3.jpg" width="100%" alt="">
+        </div>
 
+        <div class="">
             <div class="body-cate__Fan">
                 <div class="body-cate__Fan-title border-bottom position-relative">
                     Quạt sàn
@@ -586,14 +187,14 @@
 
                 <div class="body-cate__Fan-items">
                     <div class="row">
-                        <div class="col-3 mb-3">
+                        <div class="col-3 mb-3" ng-repeat="val in product | subCate:4 | limitTo:4">
                             <div class="border hover-scale-img position-relative">
                                 <div class="items-discount">
                                     <div>
-                                        <span class="percent">20%</span>
+                                        <span class="percent">{{val.product_discount}}%</span>
                                         <span class="reduce">GIẢM</span>
                                     </div>
-                                </div>   
+                                </div>
                                 <div class="item-avt overflow-hidden position-relative">
                                     <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
                                     <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
@@ -603,135 +204,13 @@
                                     </div>
                                 </div>
                                 <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
+                                    <p class="text-center hover_link txt-line-clamp" ng-click="includeHandle(8)">{{val.product_name}}
+                                    </p>
+                                    <div class=" d-flex align-items-center justify-content-between mt-3">
                                         <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                        </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                            <i class="fa-regular fa-square-plus"></i>
-                                            <span>Add to cart</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
-                                    <div>
-                                        <span class="percent">20%</span>
-                                        <span class="reduce">GIẢM</span>
-                                    </div>
-                                </div>   
-                                <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                    <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                        <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                    </div>
-                                </div>
-                                <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                        </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                            <i class="fa-regular fa-square-plus"></i>
-                                            <span>Add to cart</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
-                                    <div>
-                                        <span class="percent">20%</span>
-                                        <span class="reduce">GIẢM</span>
-                                    </div>
-                                </div>   
-                                <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                    <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                        <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                    </div>
-                                </div>
-                                <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                        </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                            <i class="fa-regular fa-square-plus"></i>
-                                            <span>Add to cart</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
-                                    <div>
-                                        <span class="percent">20%</span>
-                                        <span class="reduce">GIẢM</span>
-                                    </div>
-                                </div>   
-                                <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                    <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                        <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                    </div>
-                                </div>
-                                <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                        </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                            <i class="fa-regular fa-square-plus"></i>
-                                            <span>Add to cart</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
-                                    <div>
-                                        <span class="percent">20%</span>
-                                        <span class="reduce">GIẢM</span>
-                                    </div>
-                                </div>   
-                                <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                    <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                        <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                    </div>
-                                </div>
-                                <div class="item-content p-3">
-                                    <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
+                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$1000</div>
+                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">{{val.product_price | currency: '$':0}}
+                                            </div>
                                         </div>
                                         <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
                                             <i class="fa-regular fa-square-plus"></i>
@@ -767,3 +246,4 @@
         </div>
     </div>
 </div>
+<script src="./assets/js/home.js"></script>

@@ -179,7 +179,8 @@ label.upload {
     border-radius: 5px;
 }
 
-textarea[name="product_describe"] {
+textarea[name="product_describe"],
+textarea[name="prdDescribeEdit"] {
     height: 90px;
     resize: unset;
 }

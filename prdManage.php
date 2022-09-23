@@ -24,7 +24,7 @@
         }
 
         // check size
-        if($size > 800000){
+        if($size > 2000000){
             $checkUpload = false;
         }
 
@@ -207,10 +207,13 @@
             if(empty($prdAvt['name'])){
                 $sql = sprintf("UPDATE product set product_name = '%s', product_quantity = %d, product_quality = %d, product_brand = %d, product_price = %.2f, 
                 product_cate = %d, product_status = %d, product_material = %d, product_describe = '%s' where id = %d ", $prdName, $prdQuantity, $prdQuality, $prdBrand, $prdPrice, $prdCate, $prdStatus, $prdMaterial, $prdDescribe, $prdID);
+                    echo json_encode($sql);
+                
                 if($conn->query($sql)){
-                    $sql = "SELECT product.id, product_name, product_avt, product_quantity, status.status_name, product_price, categories.cate_name  from product JOIN status ON product_status = status.id JOIN categories ON product_cate = categories.id where product.id = ".$prdID."";
-                    $row = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
-                    echo json_encode($row);
+
+                    // $sql = "SELECT product.id, product_name, product_avt, product_quantity, status.status_name, product_price, categories.cate_name  from product JOIN status ON product_status = status.id JOIN categories ON product_cate = categories.id where product.id = ".$prdID."";
+                    // $row = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+                    // echo json_encode($row);
                 }else{
                     echo '0';
                 }  
@@ -220,9 +223,10 @@
                     $sql = sprintf("UPDATE product set product_name = '%s', product_quantity = %d, product_quality = %d, product_brand = %d, product_price = %.2f, 
                     product_cate = %d, product_status = %d, product_material = %d, product_describe = '%s', product_avt = '%s' where id = %d ", $prdName, $prdQuantity, $prdQuality, $prdBrand, $prdPrice, $prdCate, $prdStatus, $prdMaterial, $prdDescribe, $target_file, $prdID);
                     if($conn->query($sql)){
-                        $sql = "SELECT product.id, product_name, product_avt, product_quantity, status.status_name, product_price, categories.cate_name  from product JOIN status ON product_status = status.id JOIN categories ON product_cate = categories.id where product.id = ".$prdID."";
-                        $row = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
-                        echo json_encode($row);
+                        echo json_encode($sql);
+                        // $sql = "SELECT product.id, product_name, product_avt, product_quantity, status.status_name, product_price, categories.cate_name  from product JOIN status ON product_status = status.id JOIN categories ON product_cate = categories.id where product.id = ".$prdID."";
+                        // $row = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+                        // echo json_encode($row);
                     }else{
                         echo '0';
                     }    

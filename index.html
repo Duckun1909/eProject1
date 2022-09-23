@@ -20,14 +20,15 @@
     <link rel="stylesheet" href="./assets/css/login.css">
     <link rel="stylesheet" href="./assets/css/profile.css">
     <link rel="stylesheet" href="./assets/css/contact.css">
+    <link rel="stylesheet" href="./assets/css/productDetail.css">
     <script src="./assets/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="./angular-1.8.2/angular.min.js"></script>
+    <script src="./angular-1.8.2/angular.js"></script>
     <script src="./angular-1.8.2/angular-route.js"></script>
 </head>
 
-<body>
+<body ng-app="myApp" ng-controller="includePage">
     <header class="header">
         <div class="container">
             <div class="row align-items-center">
@@ -38,27 +39,23 @@
                 <nav class="header__navbar col-6">
                     <div class="navbar-collapse" id="navbarSupportedContent">
                         <ul class="d-flex justify-content-between">
-                            <li class="nav-item p-3 hover_link nav-link--active nav-item-home">
-                                <a class="nav-link" aria-current="page" href="#">Home</a>
+                            <li class="nav-item p-3 hover_link nav-item-home">
+                                <a class="nav-link" aria-current="page" ng-click="includeHandle(0)">Home</a>
                             </li>
                             <li class="nav-item p-3 hover_link nav-item-aboutUs">
-                                <a class="nav-link" aria-current="page" href="#">About Us</a>
+                                <a class="nav-link" aria-current="page" ng-click="includeHandle(1)">About Us</a>
                             </li>
-                            <li class="nav-item nav-item-product header__navbar-product header__navbar-subnav--animate p-3 hover_link d-flex align-items-center position-relative" style="perspective: 250px; perspective-origin: left;">
-                                <a class="nav-link  pe-2" aria-current="page" href="#">Product</a>
+                            <li ng-controller="cateLink" class="nav-item nav-item-product header__navbar-product header__navbar-subnav--animate p-3 hover_link d-flex align-items-center position-relative" style="perspective: 250px; perspective-origin: left;">
+                                <a class="nav-link  pe-2" aria-current="page" ng-click="includeHandle(2)">Product</a>
                                 <i class="fa-solid fa-angle-down"></i>
                                 <div class="header__categories position-absolute header__navbar-subnav">
                                     <ul class="d-flex flex-column">
-                                        <li class="pt-2 pb-2 ps-3 pe-3 border-bottom hover_link">Quạt công nghiệp</li>
-                                        <li class="pt-2 pb-2 ps-3 pe-3 border-bottom hover_link">Quạt đứng</li>
-                                        <li class="pt-2 pb-2 ps-3 pe-3 border-bottom hover_link">Quạt đảo trần</li>
-                                        <li class="pt-2 pb-2 ps-3 pe-3 border-bottom hover_link">Quạt sàn</li>
-                                        <li class="pt-2 pb-2 ps-3 pe-3 hover_link">Máy lọc không khí</li>
+                                        <li class="pt-2 pb-2 ps-3 pe-3 border-bottom hover_link text-capitalize" ng-repeat="val in categories" ng-click="includeHandle(2)">{{val.cate_name}}</li>
                                     </ul>
                                 </div>
                             </li>
                             <li class="nav-item header__navbar-service header__navbar-subnav--animate p-3 hover_link d-flex align-items-center position-relative" style="perspective: 250px; perspective-origin: left;">
-                                <a class="nav-link  pe-2" aria-current="page" href="#">Service</a>
+                                <a class="nav-link  pe-2" aria-current="page" ng-click="includeHandle(3)">Service</a>
                                 <i class="fa-solid fa-angle-down"></i>
                                 <div class="position-absolute header__navbar-subnav">
                                     <ul>
@@ -87,7 +84,7 @@
                                 </div>
                             </li>
                             <li class="nav-item header__navbar-library header__navbar-subnav--animate p-3 hover_link d-flex align-items-center position-relative " style="perspective: 250px; perspective-origin: left;">
-                                <a class="nav-link  pe-2" aria-current="page" href="#">Library</a>
+                                <a class="nav-link  pe-2" aria-current="page" ng-click="includeHandle(4)">Library</a>
                                 <i class="fa-solid fa-angle-down"></i>
                                 <div class="position-absolute header__navbar-subnav">
                                     <ul>
@@ -115,7 +112,7 @@
                                 </div>
                             </li>
                             <li class="nav-item p-3 hover_link nav-item-contactUs">
-                                <a class="nav-link " aria-current="page" href="#">Contact Us</a>
+                                <a class="nav-link " aria-current="page" ng-click="includeHandle(5)">Contact Us</a>
                             </li>
                         </ul>
                 </nav>
@@ -142,8 +139,8 @@
                             <i class="fa-solid fa-user hover_link"></i>
                             <div class="user_own position-absolute end-0">
                                 <ul class="text-center">
-                                    <li class="mb-2"><a href="#" class="ps-5 pe-5 hover_link btn-login">Login</a></li>
-                                    <li class="mb-2"><a href="#" class="ps-5 pe-5 hover_link btn-register">Register</a></li>
+                                    <li class="mb-2" ng-click="includeHandle(6)"><a class="ps-5 pe-5 hover_link btn-login">Login</a></li>
+                                    <li class="mb-2" ng-click="includeHandle(7)"><a class="ps-5 pe-5 hover_link btn-register">Register</a></li>
                                     <li class="mb-2"><a href="#" class="ps-5 pe-5 hover_link btn-compare">Compare</a></li>
                                     <li><a href="#" class="ps-5 pe-5 hover_link btn-favourite">Favourite</a></li>
                                 </ul>
@@ -163,7 +160,9 @@
             </div>
     </header>
 
-    <section class="body">
+
+    <section class="body" ng-include="elementUrl">
+
     </section>
 
     <footer class="footer border-top">
@@ -218,9 +217,8 @@
             <i class="fa-solid fa-angles-up"></i>
         </div>
     </a>
-
-
 </body>
 <script src="./assets/js/main.js"></script>
+
 
 </html>
