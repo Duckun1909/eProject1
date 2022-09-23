@@ -30,7 +30,7 @@ myApp.controller('includePage', function($scope) {
     .controller('renderPrd', function($scope) {
         let prdArr = []
         $.ajax({
-            url: 'home.php',
+            url: './home.php',
             type: 'post',
             cache: false,
             async: false,
