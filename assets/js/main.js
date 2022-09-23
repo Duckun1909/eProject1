@@ -42,7 +42,7 @@ myApp.controller('includePage', function($scope) {
         $scope.product = prdArr;
     })
     .controller('cateLink', function($scope) {
-        $.post('home.php', { getCate: true }, function(res) {
+        $.post('./home.php', { getCate: true }, function(res) {
             $scope.categories = JSON.parse(res)
         })
 
