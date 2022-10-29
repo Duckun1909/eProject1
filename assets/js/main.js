@@ -203,8 +203,9 @@ myApp
             }
         }
     })
-    .controller('cateLink', function($scope, $rootScope) {
-        $.post('home.php', { getCate: true }, function(res) {
+    .controller('cateLink', function($scope) {
+        $.post('./home.php', { getCate: true }, function(res) {
+
             $scope.categories = JSON.parse(res)
         })
     })

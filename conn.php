@@ -1,8 +1,8 @@
 <?php
-    $host = 'localhost';
-    $username = 'root';
-    $password = '';
-    $db = 'fanimationPage';
+    $host = 'sql106.epizy.com';
+    $username = 'epiz_32650604';
+    $password = 'GzfN1ntxr2';
+    $db = 'epiz_32650604_FanimationPage';
 
     $conn = new mysqli($host, $username, $password, $db);
 
