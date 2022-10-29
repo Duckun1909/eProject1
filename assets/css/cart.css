@@ -1,0 +1,19 @@
+.cart-header {
+    background: #f6f4ee;
+    padding: 16px 0px;
+}
+
+.cart-header__linker-curPage span {
+    color: var(--hover-color-link);
+}
+
+input[name='quantity']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.cart-link:hover {
+    color: #2bb9a9;
+    cursor: pointer;
+    transition: all .1s linear;
+}

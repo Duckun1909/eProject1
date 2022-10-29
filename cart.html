@@ -1,0 +1,62 @@
+<div class="cart-header mb-5">
+    <div class="container cart-header__linker text-end">
+        <span class="cart-header__linker-fromPage">
+            <i class="fa-solid fa-house-chimney pe-1 hover_link"></i>
+            <span class="pe-1 hover_link">Home</span>
+        </span>
+
+        <span class="cart-header__linker-curPage">
+            <i class="fa-solid fa-caret-right pe-1"></i>
+            <span>Cart</span>
+        </span>
+    </div>
+</div>
+
+<section class="container pt-5 mb-5" ng-controller="cart">
+    <div>
+        <h2 class="boder-bottom">Cart</h2>
+    </div>
+    <div>
+        <table class="table pt-3">
+            <tr class="text-center" style="background-color: #f6f4ee;">
+                <th class="text-left">Product</th>
+                <th style="width: 200px;">Price</th>
+                <th style="width: 200px;">Quantity</th>
+                <th style="width: 200px;">Total</th>
+            </tr>
+            <tr class="text-center align-middle pt-3 pb-3" ng-repeat="val in prdCart">
+                <td class="d-flex ps-0">
+                    <img ng-src="{{val.product_avt}}" class="border" height="100px" width="100px" style="object-fit: contain;">
+                    <div class="d-flex flex-column ms-2">
+                        <div class="cart-link">
+                            <strong>{{val.product_name}}</strong>
+                        </div>
+                        <a href="#" class="nav-link text-start w-fit" style="color: #be6f4c;" ng-click="removeCart(val.id)"><i class='fas fa-trash-alt'></i>Remove</a>
+                    </div>
+                </td>
+                <td class="">{{val.product_price | currency:'$':0}}</td>
+                <td class="">
+                    <div class="list-group list-group-horizontal w-fit m-auto" style="height: 40px;">
+                        <div class="btn btn-sm btn-success outline-unset list-group-item decreased p-2 text-center lh-base " ng-click="modifyCart(val.id, val.quantity, val.product_quantity, 'decreased')">-</div>
+                        <input class="list-group-item text-center" id="prdCart{{val.id}}" ng-blur="modifyCart(val.id, val.quantity, val.product_quantity)" min="1" type="number" ng-value="{{val.quantity}}" name="quantity" style="width: 60px;">
+                        <div class="btn btn-sm btn-success outline-unset list-group-item icreased p-2 text-center lh-base " ng-click="modifyCart(val.id, val.quantity, val.product_quantity, 'increased')">+</div>
+                    </div>
+                </td>
+                <td class="" style="color: #be6f4c;">{{val.product_price*val.quantity | currency:'$':0}}</td>
+            </tr>
+        </table>
+        <div>
+            <div class="text-end mb-2">
+                <strong>Total:</strong>
+                <span style="color: #be6f4c;">{{totalPrice | currency:'$':0}}</span>
+            </div>
+            <div class="d-flex justify-content-end">
+                <div class="text-end w-fit w-25 border-top border-danger pt-3">
+                    <button class="ps-3 pe-3 pt-2 pb-2 rounded-0 me-2 btn-background hover-back-button" ng-click="includeHandle(2)"><strong class="text-capitalize ">see more products</strong></button>
+                    <button class="ps-3 pe-3 pt-2 pb-2 rounded-0 btn-background hover-back-button" ng-click="includeHandle(11)"><strong class="text-capitalize">payment</strong></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="./assets/js/cart.js "></script>

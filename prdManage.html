@@ -309,7 +309,7 @@
                                 <option value="">--Choose material--</option>
                             </select>
                         </div>
-                        <div class="input-fields__items col-12 mb-2">
+                        <div class="input-fields__items col-12 mb-3">
                             <Label class="d-block bold">Product Image(jpg, jpeg, png)</Label>
                             <div class="thumbnail mt-3 mb-3">
                                 <div class="btn-delThumbnail w-fit d-none d-inline-block">
@@ -320,6 +320,14 @@
                             <div>
                                 <label for="uploadFile" class="upload"><i class="fa-solid fa-cloud-arrow-up"></i><span>Choose image</span></label>
                                 <input type="file" name="uploadFile" id="uploadFile" hidden>
+                            </div>
+                        </div>
+
+                        <div class="input-fields__items col-3 mb-2">
+                            <Label class="d-block bold">Gallery(jpg, jpeg, png)</Label>
+                            <div>
+                                <label for="gallery" class="upload"><i class="fa-solid fa-cloud-arrow-up"></i><span>Choose image</span></label>
+                                <input type="file" multiple="multiple" name="gallery[]" id="gallery" hidden>
                             </div>
                         </div>
 

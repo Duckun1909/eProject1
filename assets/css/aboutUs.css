@@ -8,7 +8,8 @@
 
 .aboutUs-body__general-img div{
     height: 100%;
-    background-image: url('https://demo037136.web30s.vn/image-process/get-image-v3?path=/datafiles/web30s/upload/images/7101-7200/30S-03-7136/about-1.jpg&width=0');
+    background-image: url(../img/1.jpg);
+    background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
@@ -22,11 +23,13 @@
 }
 .aboutUs-body__other-banner1 div{
     height: 100%;
-    background-image: url('https://demo037136.web30s.vn/image-process/get-image-v3?path=/datafiles/web30s/upload/images/7101-7200/30S-03-7136/about-2.jpg&width=0');
+    background-image: url(../img/2.jpg.jpg);
+    background-repeat: no-repeat;
 }
 .aboutUs-body__other-banner2 div{
     height: 100%;
-    background-image: url('https://demo037136.web30s.vn/image-process/get-image-v3?path=/datafiles/web30s/upload/images/7101-7200/30S-03-7136/about-3.jpg&width=0');
+    background-image: url(../img/3.jpg.jpg);
+    background-repeat: no-repeat;
 }
 
 .aboutUs-body__other-content-title h1{
@@ -74,7 +77,8 @@
     cursor: pointer;
 }
 .aboutUs-body__promotion-img{
-    background-image: url('https://demo037136.web30s.vn/image-process/get-image-v3?path=/datafiles/web30s/upload/images/7101-7200/30S-03-7136/slider-2.jpg&width=0');
+    background-image: url(../img/4.jpg.jpg);
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 }

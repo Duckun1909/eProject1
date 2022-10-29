@@ -1,4 +1,4 @@
-<div class="login">
+<div class="login" ng-controller="login">
     <div class="login-header mb-5">
         <div class="container login-header__linker text-end">
             <span class="login-header__linker-fromPage">
@@ -16,16 +16,16 @@
     <div class="login-body mb-5">
         <div class="container">
             <div class="p-5 w-50 m-auto" style="box-shadow: var(--shadow-block);">
-                <form action="" id="loginForm" method="POST" class="mb-4">
-                    <input class="w-100 border pt-2 pb-2 ps-3 pe-3 mb-4" type="text" minlength="6" name="username" placeholder="Username" required>
-                    <input class="w-100 border pt-2 pb-2 ps-3 pe-3 mb-4" type="password" minlength="8" name="password" placeholder="Password" required>
+                <form id="loginForm" class="mb-4" method="post" ng-submit="loginSubmit()">
+                    <input class="w-100 border pt-2 pb-2 ps-3 pe-3 mb-4" type="text" minlength="6" name="username" ng-model="username" placeholder="Username" required autocomplete="true">
+                    <input class="w-100 border pt-2 pb-2 ps-3 pe-3 mb-4" type="password" minlength="8" name="password" ng-model="password" placeholder="Password" required autocomplete="true">
                     <button type="submit" class="pt-2 pb-2 ps-4 pe-4 hover-back-button btn-background me-3">Login</button>
                 </form>
 
                 <div class="btn-forgetPass text-link-color mb-2">Forgot password?</div>
                 <div class="mb-4">
                     <span>Do not have an account ?</span>
-                    <span class="toRegister text-link-color">Register</span>
+                    <span class="toRegister text-link-color" ng-click="includeHandle(7)">Register</span>
                 </div>
 
                 <div class="loginOther w-80 m-auto">

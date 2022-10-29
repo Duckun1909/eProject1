@@ -106,7 +106,6 @@ $(document).ready(function() {
             processData: false,
             contentType: false,
             success: function(res) {
-                console.log(res)
                 switch (res) {
                     case '23000':
                         alert('Tên sản phẩm đã tồn tại vui lòng nhập tên khác!');
@@ -115,7 +114,6 @@ $(document).ready(function() {
                         alert('Thêm sản phẩm thành công!');
                         $('#addPrdForm')[0].reset()
                         thumbnailHandle('', '#addPrdForm')
-                        $('#addPrdForm .nicEdit-main')[0].innerText = '';
                         removePrd();
                         checkInputAll();
                         getPrdToEdit();
@@ -139,6 +137,7 @@ $(document).ready(function() {
                 $.post('prdManage.php', { delPrd: 'true', id: prdID, path: pathImg }, function(res) {
                     if (res == 1) {
                         $('.render-table table tbody').children(`tr#${prdID}`).remove()
+                        pagingPrd(cur_page, record_inPage, { getTotalPrd: true }, 'n');
                     } else if (res == 0) {
                         alert('Delete product failed!');
                     }
@@ -246,15 +245,20 @@ $(document).ready(function() {
             processData: false,
             contentType: false,
             success: function(res) {
-                if (res == 0) {
-                    alert('Cập nhật thông tin sản phẩm thất bại!')
-                } else if (res == 2) {
-                    alert('Lỗi upload file ảnh do ảnh đã tồn tại, định dạng không đúng...');
-                } else {
-                    alert('Cập nhật thông tin sản phẩm thành công!')
-                    renderEditForm(id)
-                    $('#uploadFileEdit').val(null)
-                    pagingPrd(cur_page, record_inPage, { getTotalPrd: true }, 'n');
+                console.log(res)
+                switch (res) {
+                    case '0':
+                        alert('Cập nhật thông tin sản phẩm thất bại!')
+                        break;
+
+                    case '2':
+                        alert('Lỗi upload file ảnh do ảnh đã tồn tại, định dạng không đúng...');
+                        break;
+                    case '1':
+                        alert('Cập nhật thông tin sản phẩm thành công!')
+                        renderEditForm(id)
+                        $('#uploadFileEdit').val(null)
+                        pagingPrd(cur_page, record_inPage, { getTotalPrd: true }, 'n');
                 }
             }
         })
@@ -441,8 +445,6 @@ $(document).ready(function() {
     }
     pagingHandle()
 
-    // Trình soạn thảo văn bản
-    // chuyển thẻ texterea với id product_describe thành trình soạn thảo văn bản
 })
 
 function readURL(input, thumbimage, thumbnailBtn) {

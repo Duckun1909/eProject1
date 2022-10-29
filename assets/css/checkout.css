@@ -1,0 +1,40 @@
+.checkout-header {
+    background: #f6f4ee;
+    padding: 16px 0px;
+}
+
+.checkout-header__linker-curPage span {
+    color: var(--hover-color-link);
+}
+
+.text-smoke {
+    color: #525252;
+}
+
+.fs-7 {
+    font-size: 0.813rem;
+}
+
+.bg-smoke {
+    background-color: #f5f5f5;
+}
+
+.dark-hover:hover {
+    background-color: #333 !important;
+    color: #fff;
+    transition: all .2s linear;
+}
+
+.fs-radio {
+    width: 6%;
+    height: 1.25rem;
+}
+
+.input-banking:checked~.banking {
+    display: block !important;
+}
+
+.pay-hover:hover {
+    background-color: #1477c3 !important;
+    transition: all .2s linear;
+}

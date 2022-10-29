@@ -53,6 +53,7 @@
         $prdAvt = $_FILES['uploadFile'];
         $prdDescribe = htmlspecialchars(($_POST['product_describe']));
         $prdMaterial = htmlspecialchars(($_POST['product_material']));
+        $gallery = $_FILES['gallery'];
         
         $checkAdd = 1;
         if(empty($prdName) || empty($prdQuantity) || empty($prdQuality) || empty($prdCate) || empty($prdBrand) || empty($prdStatus) || empty($prdPrice) || empty($prdAvt['name']) || empty($prdDescribe)){
@@ -146,7 +147,6 @@
         $delID = htmlspecialchars($_POST['id']);
         $pathImg = $_POST['path'];
         $sql = "DELETE from product where id = ".$delID."";
-
         if($conn->query($sql)){
             unlink($pathImg);
             echo '1';
@@ -206,14 +206,10 @@
         if(!empty($prdID) && !empty($prdName) && !empty($prdQuantity) && !empty($prdQuality) && !empty($prdCate) && !empty($prdBrand) && !empty($prdStatus) && !empty($prdPrice) && !empty($prdMaterial) && !empty($prdDescribe)){
             if(empty($prdAvt['name'])){
                 $sql = sprintf("UPDATE product set product_name = '%s', product_quantity = %d, product_quality = %d, product_brand = %d, product_price = %.2f, 
-                product_cate = %d, product_status = %d, product_material = %d, product_describe = '%s' where id = %d ", $prdName, $prdQuantity, $prdQuality, $prdBrand, $prdPrice, $prdCate, $prdStatus, $prdMaterial, $prdDescribe, $prdID);
-                    echo json_encode($sql);
+                product_cate = %d, product_status = %d, product_material = %d, product_describe = '%s', product_discount = %d where id = %d ", $prdName, $prdQuantity, $prdQuality, $prdBrand, $prdPrice, $prdCate, $prdStatus, $prdMaterial, $prdDescribe, $prdDiscount, $prdID);
                 
                 if($conn->query($sql)){
-
-                    // $sql = "SELECT product.id, product_name, product_avt, product_quantity, status.status_name, product_price, categories.cate_name  from product JOIN status ON product_status = status.id JOIN categories ON product_cate = categories.id where product.id = ".$prdID."";
-                    // $row = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
-                    // echo json_encode($row);
+                    echo '1';
                 }else{
                     echo '0';
                 }  
@@ -221,12 +217,9 @@
                 if(uploadFile($prdAvt)){
                     unlink($pathImg);
                     $sql = sprintf("UPDATE product set product_name = '%s', product_quantity = %d, product_quality = %d, product_brand = %d, product_price = %.2f, 
-                    product_cate = %d, product_status = %d, product_material = %d, product_describe = '%s', product_avt = '%s' where id = %d ", $prdName, $prdQuantity, $prdQuality, $prdBrand, $prdPrice, $prdCate, $prdStatus, $prdMaterial, $prdDescribe, $target_file, $prdID);
+                    product_cate = %d, product_status = %d, product_material = %d, product_describe = '%s', product_discount = %d, product_avt = '%s' where id = %d ", $prdName, $prdQuantity, $prdQuality, $prdBrand, $prdPrice, $prdCate, $prdStatus, $prdMaterial, $prdDescribe, $prdDiscount, $target_file, $prdID);
                     if($conn->query($sql)){
-                        echo json_encode($sql);
-                        // $sql = "SELECT product.id, product_name, product_avt, product_quantity, status.status_name, product_price, categories.cate_name  from product JOIN status ON product_status = status.id JOIN categories ON product_cate = categories.id where product.id = ".$prdID."";
-                        // $row = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
-                        // echo json_encode($row);
+                        echo '1';
                     }else{
                         echo '0';
                     }    

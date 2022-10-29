@@ -8,7 +8,7 @@ $(document).ready(function() {
 
     $('nav-item-product').addClass('nav-link--active')
     $('.header').addClass('headerAbout');
-    $('.headerAbout').css({ 'background-color': '#fff', 'position': 'unset', 'padding': '20px 0px', 'z-index': '1' });
+    $('.headerAbout').css({ 'background-color': '#fff', 'position': 'unset', 'padding': '20px 0px', 'z-index': '2' });
     $(window).scroll(function() {
         var scroll_top = $(this).scrollTop();
         if (scroll_top > 100) {

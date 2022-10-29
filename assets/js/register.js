@@ -11,19 +11,6 @@ $(window).scroll(function() {
     }
 })
 
-$('.toLogin').click(() => {
-    $.ajax({
-        url: './login.html',
-        type: 'GET',
-        dataType: 'html',
-        success: function(data) {
-            $('.body').html(data);
-        }
-    })
-})
-
-
-
 
 // Check Duplicate Data
 checkDuplicateForm('input[name="username"]', 'Username was existed!', 'username', 1, );
@@ -41,8 +28,8 @@ checkDuplicateForm('input[name="address"]', 0, )
 // Confirm Password
 let checkPass = 0;
 $('input[name="confirmPassword"]').keyup(function(e) {
-    $password = $('input[name="password"]').val();
-    if ($(this).val() != $password) {
+    let password = $('input[name="password"]').val();
+    if ($(this).val() != password) {
         if (checkPass == 0) {
             $(this).parent().children('.empty').remove();
             $(this).parent().append("<div class='confirm' style='color:#f44542; font-size:0.813rem; position:absolute;'>Password not match!</div>")
@@ -50,7 +37,7 @@ $('input[name="confirmPassword"]').keyup(function(e) {
             checkPass = 1;
         }
     } else {
-        if ($password != '') {
+        if (password != '') {
             $(this).parent().children('.confirm').remove();
             $(this).removeClass('border').removeClass('border-invalid').addClass('border-success')
             checkPass = 0;

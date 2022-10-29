@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    $('nav-item-aboutUs').addClass('nav-link--active')
     $('.header').addClass('headerAbout');
     $('.headerAbout').css({ 'background-color': '#fff', 'position': 'unset', 'padding': '20px 0px', 'z-index': '1' });
     $(window).scroll(function() {
@@ -12,27 +11,45 @@ $(document).ready(function() {
     })
 
     // Slideshow
-    let x = 1;
-    let width = 636
-    let sliderArr = $('.slider').children().toArray();
-    console.log(sliderArr)
-    $('.bullets .btn-prev').click(function() {
-        let translate = x * width;
-        let totalImg = $('.slider').children().length
-        $('.slider').css('transform', `translateX(-${translate}px)`)
-        x++;
-        console.log(x)
-        if (x == totalImg + 1) {
-            x = 0
-            translate = x * width
-            $('.slider').css('transform', `translateX(-${translate}px)`)
-            $('.slider').children().remove()
-            x = 1
-            setTimeout(function() {
-                sliderArr.forEach(element => {
-                    $('.slider').append(element)
-                });
-            }, 700 * x)
+    let totalSlide = $('.slider').children().length
+    if (totalSlide > 1) {
+        $('.slider-nav').slick({
+            slidesToShow: totalSlide - 1,
+            slidesToScroll: 1,
+            arrows: false,
+            asNavFor: '.slider',
+            focusOnSelect: true
+        })
+    } else if (totalSlide > 4) {
+        totalSlide = 4
+        $('.slider-nav').slick({
+            slidesToShow: totalSlide - 1,
+            slidesToScroll: 1,
+            arrows: false,
+            asNavFor: '.slider',
+            focusOnSelect: true
+        })
+    }
+
+    $('.slider').slick({
+        draggable: true,
+        autoplay: true,
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: true,
+        asNavFor: '.slider-nav'
+    })
+
+    $('.slick-prev').html(`<i class="fa-solid fa-arrow-left"></i>`).addClass('p-2 rounded-circle ')
+    $('.slick-next').html(`<i class="fa-solid fa-arrow-right"></i>`).addClass('p-2 rounded-circle ').css('right', '0')
+
+
+    // Comment
+    $('.content').click(function() { $(this).children('div').css('display', 'block') })
+    $('body').click(function(e) {
+        if ($('.content').has(e.target).length == 0) {
+            $('.content').children('div').removeAttr('style')
         }
     })
 })

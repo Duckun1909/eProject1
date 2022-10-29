@@ -1,152 +1,131 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/css/fontawesome-free-6.1.2-web/css/all.css">
-    <link rel="stylesheet" href="./assets/css/productDetail.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-</head>
-
 <body>
-    <div class="productDetail-header mb-5">
-        <div class="container productDetail-header__linker text-end">
-            <span class="productDetail-header__linker-fromPage">
-                <i class="fa-solid fa-house-chimney pe-1 "></i>
-                <span class="pe-1 hover_link" ng-click="includeHandle(0)">Home</span>
-            </span>
+    <div>
+        <div class="productDetail-header mb-5" ng-controller="renderPrd">
+            <div class="container productDetail-header__linker text-end">
+                <span class="productDetail-header__linker-fromPage">
+                    <i class="fa-solid fa-house-chimney pe-1 hover_link" ng-click="includeHandle(0)"></i>
+                    <span class="pe-1 hover_link" ng-click="includeHandle(0)">Home</span>
+                </span>
 
-            <span class="productDetail-header__linker-fromPage">
-                <i class="fa-solid fa-caret-right pe-1 "></i>
-                <span class="pe-1 hover_link" ng-click="includeHandle(2)">Product</span>
-            </span>
+                <span class="productDetail-header__linker-fromPage">
+                    <i class="fa-solid fa-caret-right pe-1"></i>
+                    <span class="pe-1 hover_link" ng-click="includeHandle(2)">Product</span>
+                </span>
 
-            <span class="productDetail-header__linker-curPage">
-                <i class="fa-solid fa-caret-right pe-1"></i>
-                <span>Quạt công nghiệp</span>
-            </span>
+                <span class="productDetail-header__linker-curPage text-capitalize">
+                    <i class="fa-solid fa-caret-right pe-1"></i>
+                    <span >{{prdDetail[0].cate_name}}</span>
+                </span>
+            </div>
         </div>
-    </div>
 
-    <section class="container pt-5">
-        <div class="row pb-5">
-
-            <div class="col-6">
-                <div class="border-bottom">
-                    <h2>Tên Sản Phẩm</h2>
-                    <h5>Giá</h5>
-                </div>
-                <div class="form-group">
-                    <p>
-                        ...................................................................</br>
-                        ...................................................................</br>
-                        ...................................................................</br>
-                    </p>
-                    <p>Color:</p>
-
-                    <div class="list-option">
-                        <button class="btn option-item" style="width: 1.875rem; background-color:#619316"><i class="fas far-square-full"></i></button>
-                        <button class="btn option-item" style="width: 1.875rem; background-color:#fcbe06"><i class="fas far-square-full"></i></button>
-                        <button class="btn option-item" style="width: 1.875rem; background-color:#f44336"><i class="fas far-square-full"></i></button>
+        <section class="container pt-5">
+            <div class="row pb-5" ng-controller="renderPrd">
+                <div class="col-6">
+                    <div class="border-bottom mb-3">
+                        <h2 class="pb-2">{{prdDetail[0].product_name}}</h2>
+                        <h4 class="pb-2 nav-link--active">{{prdDetail[0].product_price-(prdDetail[0].product_price*prdDetail[0].product_discount/100) | currency:'$':0}}</h4>
                     </div>
-
-                    <div class="d-flex text-center pt-3">
-                        <div class="list-group list-group-horizontal">
-                            <button class="btn btn-sm btn-outline-success list-group-item decreased">-</button>
-                            <input class="list-group-item text-center" type="number" min="0" value="0" name="quantyity" style="width: 60px;">
-                            <button class="btn btn-sm btn-outline-success list-group-item icreased">+</button>
+                    <p class="mb-3">{{prdDetail[0].product_describe}}</p>
+                    <div class="mb-3">
+                        <div class="mb-3">
+                            <h5>Material:</h5>
+                            <div style="background-color: #fff;" class="border border-danger w-fit p-2">{{prdDetail[0].material_name}}</div>
                         </div>
                         <div>
-                            <button class="btn btn-bg ml-3" style="background: #be6f4c; color: #fff; height: 3.125rem;"><i class="fa fa-plus-square" aria-hidden="true"></i> Them vao gio</button>
+                            <h5 class="d-inline">Quantity:</h5> <span class="prdQuantity">{{prdDetail[0].product_quantity}}</span>
+                        </div>
+                    </div>
+                    <div class="d-flex text-center" ng-controller="cart">
+                        <div class="list-group list-group-horizontal" style="height: 40px;">
+                            <div class="btn btn-sm btn-success outline-unset list-group-item decreased p-2 text-center lh-base " ng-click="decreased(prdQuanCart)">-</div>
+                            <input class="list-group-item text-center " type="number" value="1" name="quantity" style="width: 60px;" ng-model="prdQuanCart">
+                            <div class="btn btn-sm btn-success outline-unset list-group-item icreased p-2 text-center lh-base " ng-click="increased(prdDetail[0].product_quantity, prdQuanCart)">+</div>
+                        </div>
+                        <div class="ms-3">
+                            <button class="background--active hover-back-button p-2 border-0 rounded" ng-click="cartHandle(prdDetail[0].id, prdQuanCart, prdDetail[0].product_quantity)"><i class="fa fa-plus-square" aria-hidden="true" ></i> Add to cart</button>
+                        </div>
+                        <div class="ms-3"><i class="fa-regular fa-heart btn-black rounded" style="padding: 12px;"></i></div>
+                    </div>
+                </div>
+
+                <div class="col-6 ps-0 pe-0">
+                    <div class="slider border position-relative">
+                        <div ng-repeat="val in gallery">
+                            <img ng-src="{{val}}" style="object-fit: contain;" height="423px" width="100%" alt="">
+                        </div>
+                    </div>
+
+                    <div class="slider-nav mt-3">
+                        <div class="border position-relative" ng-repeat="val in gallery">
+                            <img ng-src="{{val}}" style="object-fit: contain;" height="100px" width="100%" alt="">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-6">
-                <div class="CSSgal">
-                    <div class="slider">
-                        <div style="background:#619316;">
-                            <h2>Slide 1</h2>
-                        </div>
-                        <div style="background:#fcbe06;">
-                            <h2>Slide 2</h2>
-                        </div>
-                        <div style="background:#f44336;">
-                            <h2>Slide 3</h2>
-                        </div>
-                        <div style="background:#17a2b8;">
-                            <h2>Slide 4</h2>
-                        </div>
+            <div class="comment" ng-controller="comment">
+                <div class="comment__header d-flex justify-content-between align-items-center pb-3 border-bottom mb-3">
+                    <div class="comment__header-quantity fw-semibold">
+                        <span>{{cmtQuan}}</span> comments
                     </div>
-                    <div class="bullets">
-                        <span class="rounded-circle btn-prev">
-                            <i class="fa-light fa-arrow-left"></i>
-                        </span>
 
-                        <span class="rounded-circle btn-next">
-                            <i class="fa-light fa-arrow-right"></i>
-                        </span>
+                    <div class="comment__header-sort">
+                        Sort by <select name="sortCmt" id="sortCmt" class="border outline-unset" style="font-size: .8rem;" ng-model="sortDate">
+                            <option value="-cmt_date">Newest</option>
+                            <option value="+cmt_date">Oldest</option>
+                        </select>
                     </div>
+                </div>
+                <div class="comment__body">
+                    <div class="comment__body-input d-flex align-items-start mb-4">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4iyk499ijlxw2Ytpww4eYisy8iJSgFZUcIQ&usqp=CAU" width="50px" height="50px" style="object-fit: cover;" alt="">
+                        <div class="content ms-2 w-100">
+                            <textarea class="border outline-unset ps-2 pe-2 w-100" name="contentCmt" id="contentCmt" cols="137" rows="5" placeholder="Enter comment..." ng-model="content"></textarea>
+                            <div class="w-100 bg-light p-2 text-end border border-top-0">
+                                <button class="cmtPublic btn btn-primary btn-sm" ng-click="addComment()">Public</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment__body-render">
+                        <div class="d-flex align-items-center w-100 mb-4" ng-repeat="val in cmtArr | cmtFilter: val.product_id | orderBy: sortDate">
+                            <img ng-src="{{val.user_avt==null?'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4iyk499ijlxw2Ytpww4eYisy8iJSgFZUcIQ&usqp=CAU':val.user_avt}}" width="50px" height="50px" style="object-fit: cover;" alt="">
+                            <div class="ms-2 w-100 position-relative" id="cmt{{val.id}}">
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-primary fw-semibold">{{val.user_name}}</span>
+                                    <label for="{{val.id}}" class="position-relative bg-white ps-2 pe-2" ng-show="{{userid!=val.user_id?false:true}}">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        <input type="checkbox" hidden class="adjustCmt"  id="{{val.id}}">
+                                        <div class="cmtTool position-absolute end-0 border" style="z-index: 1;">
+                                            <ul>
+                                                <li class="cmtTool--hover text-center" ng-click="updateCmt(val.id, val.user_id)">Edit comment</li>
+                                                <li class="cmtTool--hover text-center" ng-click="removeCmt(val.id, val.user_id)">Delete comment</li>
+                                            </ul>
+                                        </div>
+                                    </label>
+                                </div>
+                                <p class="text-break">{{val.content}}</p>
+                                <span class="position-absolute top-100 start-0" style="color: #90949c; font-size:0.75rem;">{{val.cmt_date | date:'dd/MM/yyyy'}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="pt-5">
+                    <h2 class="text-center">Sản Phẩm Liên Quan</h2>
+                    <h5 class="text-center">Thêm lựa chọn cho bạn</h5>
+                </div>
+                <div class="slider-2">
 
                 </div>
             </div>
-        </div>
-
-        <div class="border container-fluid">
-            <h2 class="border-bottom">Mô Tả Sản Phẩm</h2>
-            <div class="container">
-                <table class="table table-sm table-striped">
-                    <th colspan="2">DAC DIEM</th>
-                    <tr>
-                        <td style="width:50%;">ID</td>
-                        <td>...</td>
-                    </tr>
-                    <tr>
-                        <td>Chat Lieu</td>
-                        <td>...</td>
-                    </tr>
-                    <tr>
-                        <td>Mau Sac</td>
-                        <td>...</td>
-                    </tr>
-                    <tr>
-                        <td>Kich Thuoc</td>
-                        <td>...</td>
-                    </tr>
-                </table>
-                <h5 class="mt-2">HUONG DAN BAO QUAN</h5>
-                <ul style="list-style: circle">
-                    <li>
-                        <p>....</p>
-                    </li>
-                    <li>
-                        <p>....</p>
-                    </li>
-                    <li>
-                        <p>....</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-
-
-        <div>
-            <div class="pt-5">
-                <h2 class="text-center">Sản Phẩm Liên Quan</h2>
-                <h5 class="text-center">Thêm lựa chọn cho bạn</h5>
-            </div>
-            <div class="slider-2">
-
-            </div>
-        </div>
-    </section>
+        </section>
+    </div>
 </body>
 <script src="./assets/js/productDetails.js"></script>
+
 
 </html>

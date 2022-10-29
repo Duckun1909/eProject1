@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title ng-controller="adjustTitle">{{titelPage}}</title>
     <link rel="shortcut icon" href="https://web30s.vn/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="./assets/css/main.css">
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/basic.css">
@@ -21,6 +22,8 @@
     <link rel="stylesheet" href="./assets/css/profile.css">
     <link rel="stylesheet" href="./assets/css/contact.css">
     <link rel="stylesheet" href="./assets/css/productDetail.css">
+    <link rel="stylesheet" href="./assets/css/cart.css">
+    <link rel="stylesheet" href="./assets/css/checkout.css">
     <script src="./assets/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -28,7 +31,7 @@
     <script src="./angular-1.8.2/angular-route.js"></script>
 </head>
 
-<body ng-app="myApp" ng-controller="includePage">
+<body ng-controller="includePage">
     <header class="header">
         <div class="container">
             <div class="row align-items-center">
@@ -46,15 +49,15 @@
                                 <a class="nav-link" aria-current="page" ng-click="includeHandle(1)">About Us</a>
                             </li>
                             <li ng-controller="cateLink" class="nav-item nav-item-product header__navbar-product header__navbar-subnav--animate p-3 hover_link d-flex align-items-center position-relative" style="perspective: 250px; perspective-origin: left;">
-                                <a class="nav-link  pe-2" aria-current="page" ng-click="includeHandle(2)">Product</a>
+                                <a class="nav-link  pe-2" aria-current="page" ng-click="includeHandle(2, '*')">Product</a>
                                 <i class="fa-solid fa-angle-down"></i>
                                 <div class="header__categories position-absolute header__navbar-subnav">
                                     <ul class="d-flex flex-column">
-                                        <li class="pt-2 pb-2 ps-3 pe-3 border-bottom hover_link text-capitalize" ng-repeat="val in categories" ng-click="includeHandle(2)">{{val.cate_name}}</li>
+                                        <li class="pt-2 pb-2 ps-3 pe-3 border-bottom hover_link text-capitalize" ng-repeat="val in categories" ng-click="includeHandle(2, val.id)">{{val.cate_name}}</li>
                                     </ul>
                                 </div>
                             </li>
-                            <li class="nav-item header__navbar-service header__navbar-subnav--animate p-3 hover_link d-flex align-items-center position-relative" style="perspective: 250px; perspective-origin: left;">
+                            <!-- <li class="nav-item header__navbar-service header__navbar-subnav--animate p-3 hover_link d-flex align-items-center position-relative" style="perspective: 250px; perspective-origin: left;">
                                 <a class="nav-link  pe-2" aria-current="page" ng-click="includeHandle(3)">Service</a>
                                 <i class="fa-solid fa-angle-down"></i>
                                 <div class="position-absolute header__navbar-subnav">
@@ -110,40 +113,34 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </li>
+                            </li> -->
                             <li class="nav-item p-3 hover_link nav-item-contactUs">
                                 <a class="nav-link " aria-current="page" ng-click="includeHandle(5)">Contact Us</a>
                             </li>
                         </ul>
                 </nav>
 
-
                 <div class="header__widget-group col-3 d-flex align-items-center">
                     <ul class="d-flex align-items-center w-100 justify-content-evenly">
                         <li class="widget-group-search position-relative">
                             <i class="fa-solid fa-magnifying-glass hover_link"></i>
-                            <div class="search_bar d-flex align-items-center position-absolute translate-middle">
-                                <input type="text" name="" placeholder="Enter the keyword...">
-                                <div class="hover-back-button">
+                            <div class="search_bar align-items-center position-absolute translate-middle">
+                                <input type="text" name="" placeholder="Enter the keyword..." ng-model="search">
+                                <div class="hover-back-button" ng-click="includeHandle(2, '*'); searchName=search">
                                     <i class="fa-solid fa-magnifying-glass" style="font-size: 1rem;"></i> Search
                                 </div>
                             </div>
                         </li>
-                        <li class="widget-group-cart">
+                        <li class="widget-group-cart" ng-click="includeHandle(9)">
                             <a href="#" class="hover_link position-relative">
                                 <i class="fa-solid fa-basket-shopping" style="font-size: 20px;"></i>
-                                <span class="position-absolute">0</span>
+                                <span class="position-absolute">{{totalCart}}</span>
                             </a>
                         </li>
                         <li class="widget-group-user position-relative">
                             <i class="fa-solid fa-user hover_link"></i>
                             <div class="user_own position-absolute end-0">
-                                <ul class="text-center">
-                                    <li class="mb-2" ng-click="includeHandle(6)"><a class="ps-5 pe-5 hover_link btn-login">Login</a></li>
-                                    <li class="mb-2" ng-click="includeHandle(7)"><a class="ps-5 pe-5 hover_link btn-register">Register</a></li>
-                                    <li class="mb-2"><a href="#" class="ps-5 pe-5 hover_link btn-compare">Compare</a></li>
-                                    <li><a href="#" class="ps-5 pe-5 hover_link btn-favourite">Favourite</a></li>
-                                </ul>
+
                             </div>
                         </li>
                         <li class="widget-group-bilingual">
@@ -159,8 +156,6 @@
                 </div>
             </div>
     </header>
-
-
     <section class="body" ng-include="elementUrl">
 
     </section>
@@ -217,8 +212,18 @@
             <i class="fa-solid fa-angles-up"></i>
         </div>
     </a>
-</body>
-<script src="./assets/js/main.js"></script>
 
+    <div class="loader d-none">
+        <div class="m-auto d-flex align-items-center">
+            <div class="spinner-border text-warning me-2" role="status ">
+                <span class="visually-hidden "></span>
+            </div>
+            <span style="color:#fff;">Loading...</span>
+        </div>
+    </div>
+</body>
+<script src="./assets/js/main.js "></script>
+<script type="text/javascript " src="https://code.jquery.com/jquery-migrate-1.2.1.min.js "></script>
+<script type="text/javascript " src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js "></script>
 
 </html>

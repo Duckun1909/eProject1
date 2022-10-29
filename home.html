@@ -1,6 +1,6 @@
 <div class="slider">
     <div id="carouselExampleIndicators" data-bs-interval="3000" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
+        <div class="carousel-indicators" style="z-index: 1;">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
@@ -28,41 +28,44 @@
 </div>
 
 <div class="container mb-5" ng-controller="renderPrd">
-    <div class="body-cate">
+    <div class="body-cate" ng-controller="cart">
         <div class="">
             <div class="body-cate__Fan mb-5">
                 <div class="body-cate__Fan-title border-bottom position-relative">
-                    Quạt công nghiệp
+                    Stand Fan
                 </div>
 
                 <div class="body-cate__Fan-items">
                     <div class="row">
-                        <div class="col-3 mb-3" ng-repeat="val in product | subCate:1 | limitTo:4">
+                        <div class="col-3 mb-3" ng-repeat="val in product | cateFilter:2 | limitTo:4">
                             <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
+                                <div class="items-discount" class="items-discount" ng-show="{{val.product_discount==0?false:true}}">
                                     <div>
                                         <span class="percent">{{val.product_discount}}%</span>
                                         <span class="reduce">GIẢM</span>
                                     </div>
                                 </div>
                                 <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
+                                    <img ng-src="{{val.product_avt}}" width="304x" height="304px" style="object-fit: contain;" alt="">
                                     <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
                                         <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
+                                        <div class="item-avt__option-view hover-background" data-bs-toggle="modal" data-bs-target="#prdModal" ng-click="prdDetailHandle(val.id)"><i class="fa-solid fa-eye"></i></div>
                                     </div>
                                 </div>
                                 <div class="item-content p-3">
-                                    <p class="text-center hover_link txt-line-clamp" ng-click="includeHandle(8)">{{val.product_name}}
-                                    </p>
+                                    <div class="text-center hover_link txt-line-clamp" ng-click="prdDetailHandle(val.id, 'gotodetail')">
+                                        <div class="d-flex h-100">
+                                            <p class="m-auto">{{val.product_name}}</p>
+                                        </div>
+                                    </div>
+
                                     <div class=" d-flex align-items-center justify-content-between mt-3">
                                         <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$1000</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">{{val.product_price | currency: '$':0}}
+                                            <div class="item-content__old-price pe-3 text-decoration-line-through">{{val.product_discount==0?null:val.product_price | currency: '$':0}}</div>
+                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">{{val.product_price-(val.product_price*val.product_discount/100) | currency: '$':0}}
                                             </div>
                                         </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
+                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background" ng-click="cartHandle(val.id, 1, val.product_quantity)">
                                             <i class="fa-regular fa-square-plus"></i>
                                             <span>Add to cart</span>
                                         </div>
@@ -82,37 +85,39 @@
         <div class="">
             <div class="body-cate__Fan mb-5">
                 <div class="body-cate__Fan-title border-bottom position-relative">
-                    Quạt đứng
+                    Ceiling fan
                 </div>
 
                 <div class="body-cate__Fan-items">
                     <div class="row">
-                        <div class="col-3 mb-3" ng-repeat="val in product | subCate:2 | limitTo:4">
+                        <div class="col-3 mb-3" ng-repeat="val in product | cateFilter:3 | limitTo:4">
                             <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
+                                <div class="items-discount" class="items-discount" ng-show="{{val.product_discount==0?false:true}}">
                                     <div>
                                         <span class="percent">{{val.product_discount}}%</span>
                                         <span class="reduce">GIẢM</span>
                                     </div>
                                 </div>
                                 <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
+                                    <img ng-src="{{val.product_avt}}" width="304x" height="304px" style="object-fit: contain;" alt="">
                                     <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
                                         <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
+                                        <div class="item-avt__option-view hover-background" data-bs-toggle="modal" data-bs-target="#prdModal" ng-click="prdDetailHandle(val.id)"><i class="fa-solid fa-eye"></i></div>
                                     </div>
                                 </div>
                                 <div class="item-content p-3">
-                                    <p class="text-center hover_link txt-line-clamp" ng-click="includeHandle(8)">{{val.product_name}}
-                                    </p>
+                                    <div class="text-center hover_link txt-line-clamp" ng-click="prdDetailHandle(val.id, 'gotodetail')">
+                                        <div class="d-flex h-100">
+                                            <p class="m-auto">{{val.product_name}}</p>
+                                        </div>
+                                    </div>
                                     <div class=" d-flex align-items-center justify-content-between mt-3">
                                         <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$1000</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">{{val.product_price | currency: '$':0}}
+                                            <div class="item-content__old-price pe-3 text-decoration-line-through">{{val.product_discount==0?null:val.product_price | currency: '$':0}}</div>
+                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">{{val.product_price-(val.product_price*val.product_discount/100) | currency: '$':0}}
                                             </div>
                                         </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
+                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background" ng-click="cartHandle(val.id, 1, val.product_quantity)">
                                             <i class="fa-regular fa-square-plus"></i>
                                             <span>Add to cart</span>
                                         </div>
@@ -132,37 +137,39 @@
         <div class="">
             <div class="body-cate__Fan mb-5">
                 <div class="body-cate__Fan-title border-bottom position-relative">
-                    Quạt đảo trần
+                    Air Conditioner Fan
                 </div>
 
                 <div class="body-cate__Fan-items">
                     <div class="row">
-                        <div class="col-3 mb-3" ng-repeat="val in product | subCate:3 | limitTo:4">
+                        <div class="col-3 mb-3" ng-repeat="val in product | cateFilter:7 | limitTo:4">
                             <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
+                                <div class="items-discount" class="items-discount" ng-show="{{val.product_discount==0?false:true}}">
                                     <div>
                                         <span class="percent">{{val.product_discount}}%</span>
                                         <span class="reduce">GIẢM</span>
                                     </div>
                                 </div>
                                 <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
+                                    <img ng-src="{{val.product_avt}}" width="304x" height="304px" style="object-fit: contain;" alt="">
                                     <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
                                         <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
+                                        <div class="item-avt__option-view hover-background" data-bs-toggle="modal" data-bs-target="#prdModal" ng-click="prdDetailHandle(val.id)"><i class="fa-solid fa-eye"></i></div>
                                     </div>
                                 </div>
                                 <div class="item-content p-3">
-                                    <p class="text-center hover_link txt-line-clamp" ng-click="includeHandle(8)">{{val.product_name}}
-                                    </p>
+                                    <div class="text-center hover_link txt-line-clamp" ng-click="prdDetailHandle(val.id, 'gotodetail')">
+                                        <div class="d-flex h-100">
+                                            <p class="m-auto">{{val.product_name}}</p>
+                                        </div>
+                                    </div>
                                     <div class=" d-flex align-items-center justify-content-between mt-3">
                                         <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$1000</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">{{val.product_price | currency: '$':0}}
+                                            <div class="item-content__old-price pe-3 text-decoration-line-through">{{val.product_discount==0?null:val.product_price | currency: '$':0}}</div>
+                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">{{val.product_price-(val.product_price*val.product_discount/100) | currency: '$':0}}
                                             </div>
                                         </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
+                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background" ng-click="cartHandle(val.id, 1, val.product_quantity)">
                                             <i class="fa-regular fa-square-plus"></i>
                                             <span>Add to cart</span>
                                         </div>
@@ -182,42 +189,100 @@
         <div class="">
             <div class="body-cate__Fan">
                 <div class="body-cate__Fan-title border-bottom position-relative">
-                    Quạt sàn
+                    Air Purifier
                 </div>
 
                 <div class="body-cate__Fan-items">
                     <div class="row">
-                        <div class="col-3 mb-3" ng-repeat="val in product | subCate:4 | limitTo:4">
+                        <div class="col-3 mb-3" ng-repeat="val in product | cateFilter:5 | limitTo:4">
                             <div class="border hover-scale-img position-relative">
-                                <div class="items-discount">
+                                <div class="items-discount" ng-show="{{val.product_discount==0?false:true}}">
                                     <div>
                                         <span class="percent">{{val.product_discount}}%</span>
                                         <span class="reduce">GIẢM</span>
                                     </div>
                                 </div>
                                 <div class="item-avt overflow-hidden position-relative">
-                                    <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
+                                    <img ng-src="{{val.product_avt}}" width="304x" height="304px" style="object-fit: contain;" alt="">
                                     <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                        <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
                                         <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                        <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
+                                        <div class="item-avt__option-view hover-background" data-bs-toggle="modal" data-bs-target="#prdModal" ng-click="prdDetailHandle(val.id)"><i class="fa-solid fa-eye"></i></div>
                                     </div>
                                 </div>
                                 <div class="item-content p-3">
-                                    <p class="text-center hover_link txt-line-clamp" ng-click="includeHandle(8)">{{val.product_name}}
-                                    </p>
+                                    <div class="text-center hover_link txt-line-clamp" ng-click="prdDetailHandle(val.id, 'gotodetail')">
+                                        <div class="d-flex h-100">
+                                            <p class="m-auto">{{val.product_name}}</p>
+                                        </div>
+                                    </div>
                                     <div class=" d-flex align-items-center justify-content-between mt-3">
                                         <div class="d-flex align-items-center">
-                                            <div class="item-content__old-price pe-3 text-decoration-line-through">$1000</div>
-                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">{{val.product_price | currency: '$':0}}
+                                            <div class="item-content__old-price pe-3 text-decoration-line-through">{{val.product_discount==0?null:val.product_price | currency: '$':0}}</div>
+                                            <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">{{val.product_price-(val.product_price*val.product_discount/100) | currency: '$':0}}
                                             </div>
                                         </div>
-                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
+                                        <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background" ng-click="cartHandle(val.id, 1, val.product_quantity)">
                                             <i class="fa-regular fa-square-plus"></i>
                                             <span>Add to cart</span>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade " id="prdModal" tabindex="-1" aria-labelledby="prdTitle" aria-hidden="true" ng-controller="cart">
+        <div class="modal-dialog modal-dialog-centered w-75 ps-3 pe-3 mw-100">
+            <div class="modal-content rounded-0">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-close border border-warning rounded-0" style="font-size: 0.5rem;" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row pb-5">
+                        <div class="col-6">
+                            <div class="border-bottom mb-3">
+                                <h2 class="pb-2 ">{{prdDetail[0].product_name}}</h2>
+                                <h4 class="pb-2 nav-link--active">{{prdDetail[0].product_price-(prdDetail[0].product_price*prdDetail[0].product_discount/100) | currency:'$':0}}</h4>
+                            </div>
+                            <p class="mb-3">{{prdDetail[0].product_describe}}</p>
+                            <div class="mb-3">
+                                <div class="mb-3">
+                                    <h5>Material:</h5>
+                                    <div style="background-color: #fff;" class="border border-danger w-fit p-2">{{prdDetail[0].material_name}}</div>
+                                </div>
+                                <div>
+                                    <h5 class="d-inline">Quantity:</h5> <span class="prdQuantity">{{prdDetail[0].product_quantity}}</span>
+                                </div>
+                            </div>
+                            <div class="d-flex text-center">
+                                <div class="list-group list-group-horizontal" style="height: 40px;">
+                                    <div class="btn btn-sm btn-success outline-unset list-group-item decreased p-2 text-center lh-base " ng-click="decreased(prdQuanCart,mode)">-</div>
+                                    <input class="list-group-item text-center " type="number" value="1" name="quantity" style="width: 60px;" ng-model="prdQuanCart">
+                                    <div class="btn btn-sm btn-success outline-unset list-group-item icreased p-2 text-center lh-base " ng-click="increased(prdDetail[0].product_quantity, prdQuanCart,mode)">+</div>
+                                </div>
+                                <div class="ms-3">
+                                    <button class="background--active hover-back-button p-2 border-0 rounded" ng-click="cartHandle(prdDetail[0].id, prdQuanCart, prdDetail[0].product_quantity)"><i class="fa fa-plus-square" aria-hidden="true" ></i> Add to cart</button>
+                                </div>
+                                <div class="ms-3"><i class="fa-regular fa-heart btn-black rounded" style="padding: 12px;"></i></div>
+                            </div>
+                        </div>
+
+                        <div class="col-6 ps-0 pe-0">
+                            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active" ng-repeat="val in gallery">
+                                        <img ng-src="{{val}}" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                    <i class="fa-solid fa-chevron-left" style="font-size: 1.563rem; color:#333;"></i>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                    <i class="fa-solid fa-chevron-right" style="font-size: 1.563rem; color:#333;"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -246,4 +311,5 @@
         </div>
     </div>
 </div>
+
 <script src="./assets/js/home.js"></script>

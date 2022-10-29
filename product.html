@@ -1,11 +1,11 @@
-<div class="product">
+<div class="product" ng-controller="renderPrd">
     <div class="product-header mb-5">
         <div class="container product-header__linker text-end">
             <span class="product-header__linker-fromPage">
                 <i class="fa-solid fa-house-chimney pe-1 hover_link"></i>
                 <span class="pe-1 hover_link">Home</span>
             </span>
-    
+
             <span class="product-header__linker-curPage">
                 <i class="fa-solid fa-caret-right pe-1"></i>
                 <span>Product</span>
@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div class="product-body mb-5">
+    <div class="product-body mb-5" ng-controller="product">
         <div class="container">
             <div class="product-body__filter">
                 <div class="product-body__filter-title d-flex justify-content-between align-items-center">
@@ -27,281 +27,64 @@
                 <div class="product-body__filter-taskbar pt-3 pb-2">
                     <div class="row">
                         <div class="product-body__filter-taskbar-limit col-2">
-                            <label for="">Hiển thị</label>
-                            <select class="filter-select border pt-1 pb-1 ps-3 pe-3" name="" id="">
-                                <option value="">Mặc định</option>
-                                <option value="">9</option>
-                                <option value="">18</option>
-                                <option value="">27</option>
-                                <option value="">36</option>
-                                <option value="">45</option>
+                            <label for="">View</label>
+                            <select class="filter-select border pt-1 pb-1 ps-3 pe-3" name="" id="" ng-model="limitPrd">
+                                <option value="12">12</option>
+                                <option value="24">24</option>
+                                <option value="36">36</option>
+                                <option value="48">48</option>
                             </select>
                         </div>
-    
+
                         <div class="product-body__filter-taskbar-sort col-4">
-                            <label for="">Sắp xếp</label>
-                            <select class="filter-select border pt-1 pb-1 ps-3 pe-3" name="" id="">
-                                <option value="">Mặc định</option>
-                                <option value="">Sắp xếp theo tên (A-Z)</option>
-                                <option value="">Sắp xếp theo tên (Z-A)</option>
-                                <option value="">Sắp xếp theo giá (Nhỏ -> Lớn)</option>
-                                <option value="">Sắp xếp theo giá (Lớn -> Nhỏ)</option>
-                                <option value="">Sắp xếp theo khuyến mãi (Có -> không)</option>
-                                <option value="">Sắp xếp theo khuyến mãi (Không -> Có)</option>
+                            <label for="">Sort by</label>
+                            <select class="filter-select border pt-1 pb-1 ps-3 pe-3" name="" id="" ng-model="sortPrd">
+                                <option value="+product_name">Sắp xếp theo tên (A-Z)</option>
+                                <option value="-product_name">Sắp xếp theo tên (Z-A)</option>
+                                <option value="+product_price">Sắp xếp theo giá (Nhỏ -> Lớn)</option>
+                                <option value="-product_price">Sắp xếp theo giá (Lớn -> Nhỏ)</option>
+                                <option value="+product_discount">Sắp xếp theo khuyến mãi (Không -> Có)</option>
+                                <option value="-product_discount">Sắp xếp theo khuyến mãi (Có -> Không)</option>
                             </select>
                         </div>
-    
+
                         <div class="product-body__filter-taskbar-view col-6 d-flex align-items-center justify-content-end">
                             <i class="fa-solid fa-border-all pe-2 nav-link--active"></i>
                             <i class="fa-solid fa-list"></i>
                         </div>
                     </div>
                 </div>
-
                 <div class="product-body__filter-render">
                     <div class="body-cate__Fan-items">
                         <div class="row">
-                            <div class="col-3 mb-3">
+                            <div class="col-3 mb-3" ng-repeat="val in product | cateFilter:cateID | limitTo:limitPrd | orderBy: sortPrd | filter:searchName">
                                 <div class="border hover-scale-img position-relative">
-                                    <div class="items-discount">
+                                    <div class="items-discount" ng-show="{{val.product_discount==0?false:true}}">
                                         <div>
-                                            <span class="percent">20%</span>
+                                            <span class="percent">{{val.product_discount}}%</span>
                                             <span class="reduce">GIẢM</span>
                                         </div>
-                                    </div>   
+                                    </div>
                                     <div class="item-avt overflow-hidden position-relative">
-                                        <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
+                                        <img ng-src="{{val.product_avt}}" width="304x" height="304px" style="object-fit: contain;" alt="">
                                         <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                            <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
                                             <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                            <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
+                                            <div class="item-avt__option-view hover-background" data-bs-toggle="modal" data-bs-target="#prdModal" ng-click="prdDetailHandle(val.id)"><i class="fa-solid fa-eye"></i></div>
                                         </div>
                                     </div>
                                     <div class="item-content p-3">
-                                        <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                        <div class="d-flex align-items-center justify-content-between mt-3">
+                                        <div class="text-center hover_link txt-line-clamp" ng-click="prdDetailHandle(val.id, 'gotodetail')">
+                                            <div class="d-flex h-100">
+                                                <p class="m-auto">{{val.product_name}}</p>
+                                            </div>
+                                        </div>
+                                        <div class=" d-flex align-items-center justify-content-between mt-3">
                                             <div class="d-flex align-items-center">
-                                                <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                                <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
+                                                <div class="item-content__old-price pe-3 text-decoration-line-through">{{val.product_discount==0?null:val.product_price | currency: '$':0}}</div>
+                                                <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">{{val.product_price-(val.product_price*val.product_discount/100) | currency: '$':0}}
+                                                </div>
                                             </div>
-                                            <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                                <i class="fa-regular fa-square-plus"></i>
-                                                <span>Add to cart</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3 mb-3">
-                                <div class="border hover-scale-img position-relative">
-                                    <div class="items-discount">
-                                        <div>
-                                            <span class="percent">20%</span>
-                                            <span class="reduce">GIẢM</span>
-                                        </div>
-                                    </div>   
-                                    <div class="item-avt overflow-hidden position-relative">
-                                        <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                        <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                            <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                            <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                            <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                        </div>
-                                    </div>
-                                    <div class="item-content p-3">
-                                        <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                        <div class="d-flex align-items-center justify-content-between mt-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                                <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                            </div>
-                                            <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                                <i class="fa-regular fa-square-plus"></i>
-                                                <span>Add to cart</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3 mb-3">
-                                <div class="border hover-scale-img position-relative">
-                                    <div class="items-discount">
-                                        <div>
-                                            <span class="percent">20%</span>
-                                            <span class="reduce">GIẢM</span>
-                                        </div>
-                                    </div>   
-                                    <div class="item-avt overflow-hidden position-relative">
-                                        <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                        <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                            <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                            <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                            <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                        </div>
-                                    </div>
-                                    <div class="item-content p-3">
-                                        <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                        <div class="d-flex align-items-center justify-content-between mt-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                                <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                            </div>
-                                            <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                                <i class="fa-regular fa-square-plus"></i>
-                                                <span>Add to cart</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3 mb-3">
-                                <div class="border hover-scale-img position-relative">
-                                    <div class="items-discount">
-                                        <div>
-                                            <span class="percent">20%</span>
-                                            <span class="reduce">GIẢM</span>
-                                        </div>
-                                    </div>   
-                                    <div class="item-avt overflow-hidden position-relative">
-                                        <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                        <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                            <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                            <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                            <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                        </div>
-                                    </div>
-                                    <div class="item-content p-3">
-                                        <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                        <div class="d-flex align-items-center justify-content-between mt-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                                <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                            </div>
-                                            <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                                <i class="fa-regular fa-square-plus"></i>
-                                                <span>Add to cart</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3 mb-3">
-                                <div class="border hover-scale-img position-relative">
-                                    <div class="items-discount">
-                                        <div>
-                                            <span class="percent">20%</span>
-                                            <span class="reduce">GIẢM</span>
-                                        </div>
-                                    </div>   
-                                    <div class="item-avt overflow-hidden position-relative">
-                                        <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                        <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                            <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                            <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                            <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                        </div>
-                                    </div>
-                                    <div class="item-content p-3">
-                                        <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                        <div class="d-flex align-items-center justify-content-between mt-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                                <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                            </div>
-                                            <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                                <i class="fa-regular fa-square-plus"></i>
-                                                <span>Add to cart</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3 mb-3">
-                                <div class="border hover-scale-img position-relative">
-                                    <div class="items-discount">
-                                        <div>
-                                            <span class="percent">20%</span>
-                                            <span class="reduce">GIẢM</span>
-                                        </div>
-                                    </div>   
-                                    <div class="item-avt overflow-hidden position-relative">
-                                        <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                        <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                            <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                            <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                            <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                        </div>
-                                    </div>
-                                    <div class="item-content p-3">
-                                        <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                        <div class="d-flex align-items-center justify-content-between mt-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                                <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                            </div>
-                                            <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                                <i class="fa-regular fa-square-plus"></i>
-                                                <span>Add to cart</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3 mb-3">
-                                <div class="border hover-scale-img position-relative">
-                                    <div class="items-discount">
-                                        <div>
-                                            <span class="percent">20%</span>
-                                            <span class="reduce">GIẢM</span>
-                                        </div>
-                                    </div>   
-                                    <div class="item-avt overflow-hidden position-relative">
-                                        <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                        <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                            <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                            <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                            <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                        </div>
-                                    </div>
-                                    <div class="item-content p-3">
-                                        <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                        <div class="d-flex align-items-center justify-content-between mt-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                                <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                            </div>
-                                            <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
-                                                <i class="fa-regular fa-square-plus"></i>
-                                                <span>Add to cart</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3 mb-3">
-                                <div class="border hover-scale-img position-relative">
-                                    <div class="items-discount">
-                                        <div>
-                                            <span class="percent">20%</span>
-                                            <span class="reduce">GIẢM</span>
-                                        </div>
-                                    </div>   
-                                    <div class="item-avt overflow-hidden position-relative">
-                                        <img src="https://hatari.com.vn/wp-content/uploads/2019/02/hatari_iq_25m1-400x400.jpg" width="100%" alt="">
-                                        <div class="item-avt__option position-absolute top-50 start-50 translate-middle d-flex">
-                                            <div class="item-avt__option-compare hover-background"><i class="fa-solid fa-shuffle"></i></div>
-                                            <div class="item-avt__option-like ms-2 me-2 hover-background"><i class="fa-regular fa-heart"></i></div>
-                                            <div class="item-avt__option-view hover-background"><i class="fa-solid fa-eye"></i></div>
-                                        </div>
-                                    </div>
-                                    <div class="item-content p-3">
-                                        <p class="text-center hover_link">Quạt công nghiệp Storm IQ25M1 Thái Lan 2018</p>
-                                        <div class="d-flex align-items-center justify-content-between mt-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="item-content__old-price pe-3 text-decoration-line-through">$100</div>
-                                                <div class="item-content__new-price" style="font-size:1.25rem; color: #be6f4c;">$50</div>
-                                            </div>
-                                            <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background">
+                                            <div class="item-content__add-cart pt-2 pb-2 ps-3 pe-3 hover-background" ng-click="cartHandle(val.id, 1, val.product_quantity)">
                                                 <i class="fa-regular fa-square-plus"></i>
                                                 <span>Add to cart</span>
                                             </div>
@@ -317,9 +100,7 @@
                     <ul class="d-flex justify-content-center">
                         <li class="btn-prev rounded-circle mt-1 me-1 hover-background"><i class="fa-solid fa-angle-left"></i></li>
                         <div class="page-list d-flex">
-                            <li class="rounded-circle mt-1 me-1 hover-background hover-background background--active">1</li>
-                            <li class="rounded-circle mt-1 me-1 hover-background">2</li>
-                            <li class="rounded-circle mt-1 me-1 hover-background">3</li>
+                            <li class="rounded-circle mt-1 me-1 hover-background background--active" ng-repeat="i in totalPage" ng-click="pagingHandle(i, record_inPage)">{{i}}</li>
                         </div>
                         <li class="btn-next rounded-circle mt-1 me-1 hover-background"><i class="fa-solid fa-angle-right"></i></li>
                     </ul>
@@ -328,35 +109,25 @@
         </div>
     </div>
 
-    <div class="product-tool border p-4">
+    <div class="product-tool border p-4" ng-controller="product">
         <div class="product-tool__close hover_link mb-4" style="width: fit-content;">
             <i class="fa-solid fa-circle-xmark"></i>
             <span>Close</span>
         </div>
-        
+
         <div class="product-tool__range mb-4">
-            <input type="range" min="0" max="200" name="" id="" style="width: 100%;">
+            <label for="">Price</label>
+            <input type="range" min="0" max="1000" name="" id="" style="width: 100%;">
         </div>
 
-        <div class="product-tool__color mb-4">
-            <div class="product-tool__color-title text-uppercase pb-2 text-shadow">
-                Màu sắc
+        <div class="product-tool__brand mb-4">
+            <div class="product-tool__brand-title text-uppercase pb-2 text-shadow">
+                Brand
             </div>
-            <div class="product-tool__color-items">
-                <div class="d-flex align-items-center mb-2">
-                    <input type="checkbox" name="color[]" id="">
-                    <div class="color-box"></div>
-                    <label for="">Xanh</label>
-                </div>
-                <div class="d-flex align-items-center mb-2">
-                    <input type="checkbox" name="" id="">
-                    <div class="color-box"></div>
-                    <label for="">Đỏ</label>
-                </div>
-                <div class="d-flex align-items-center mb-2">
-                    <input type="checkbox" name="" id="">
-                    <div class="color-box"></div>
-                    <label for="">Tím</label>
+            <div class="product-tool__brand-items hide-scrollbar" style="max-height: 300px;">{{brandSelect}}
+                <div class="d-flex align-items-center mb-2" ng-repeat="val in brandArr">
+                    <input type="checkbox" name="brand[]" id="brand{{val.id}}" ng-value="{{val.id}}" style="width:15px; height:15px;" ng-checked="brandSelect">
+                    <label for="brand{{val.id}}" class="ms-3 text-capitalize">{{val.brand_name}}</label>
                 </div>
             </div>
         </div>
@@ -366,20 +137,69 @@
                 Chất liệu
             </div>
 
-            <div class="product-tool__material-items">
-                <div class="d-flex align-items-center mb-2">
-                    <input type="checkbox" name="material[]" id="">
-                    <label class="ms-2" for="">Gỗ</label>
+            <div class="product-tool__material-items hide-scrollbar" style="max-height:200px;">
+                <div class="d-flex align-items-center mb-2" ng-repeat="val in mateArr">
+                    <input type="checkbox" name="material[]" id="material{{val.id}}" ng-value="{{val.id}}" style="width:15px; height:15px;">
+                    <label for="material{{val.id}}" class="ms-3 text-capitalize">{{val.material_name}}</label>
                 </div>
-                <div class="d-flex align-items-center mb-2">
-                    <input type="checkbox" name="" id="">
-                    <label class="ms-2" for="">Kim loại</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade " id="prdModal" tabindex="-1" aria-labelledby="prdTitle" aria-hidden="true" ng-controller="cart">
+        <div class="modal-dialog modal-dialog-centered w-75 ps-3 pe-3 mw-100">
+            <div class="modal-content rounded-0">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-close border border-warning rounded-0" style="font-size: 0.5rem;" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="d-flex align-items-center mb-2">
-                    <input type="checkbox" name="" id="">
-                    <label class="ms-2" for="">Nhựa</label>
+                <div class="modal-body">
+                    <div class="row pb-5">
+                        <div class="col-6">
+                            <div class="border-bottom mb-3">
+                                <h2 class="pb-2 ">{{prdDetail[0].product_name}}</h2>
+                                <h4 class="pb-2 nav-link--active">{{prdDetail[0].product_price-(prdDetail[0].product_price*prdDetail[0].product_discount/100) | currency:'$':0}}</h4>
+                            </div>
+                            <p class="mb-3">{{prdDetail[0].product_describe}}</p>
+                            <div class="mb-3">
+                                <div class="mb-3">
+                                    <h5>Material:</h5>
+                                    <div style="background-color: #fff;" class="border border-danger w-fit p-2">{{prdDetail[0].material_name}}</div>
+                                </div>
+                                <div>
+                                    <h5 class="d-inline">Quantity:</h5> <span class="prdQuantity">{{prdDetail[0].product_quantity}}</span>
+                                </div>
+                            </div>
+                            <div class="d-flex text-center">
+                                <div class="list-group list-group-horizontal" style="height: 40px;">
+                                    <div class="btn btn-sm btn-success outline-unset list-group-item decreased p-2 text-center lh-base " ng-click="decreased(prdQuanCart,mode)">-</div>
+                                    <input class="list-group-item text-center " type="number" value="1" name="quantity" style="width: 60px;" ng-model="prdQuanCart">
+                                    <div class="btn btn-sm btn-success outline-unset list-group-item icreased p-2 text-center lh-base " ng-click="increased(prdDetail[0].product_quantity, prdQuanCart,mode)">+</div>
+                                </div>
+                                <div class="ms-3">
+                                    <button class="background--active hover-back-button p-2 border-0 rounded" ng-click="cartHandle(prdDetail[0].id, prdQuanCart, prdDetail[0].product_quantity)"><i class="fa fa-plus-square" aria-hidden="true" ></i> Add to cart</button>
+                                </div>
+                                <div class="ms-3"><i class="fa-regular fa-heart btn-black rounded" style="padding: 12px;"></i></div>
+                            </div>
+                        </div>
+
+                        <div class="col-6 ps-0 pe-0">
+                            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active" ng-repeat="val in gallery">
+                                        <img ng-src="{{val}}" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                    <i class="fa-solid fa-chevron-left" style="font-size: 1.563rem; color:#333;"></i>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                    <i class="fa-solid fa-chevron-right" style="font-size: 1.563rem; color:#333;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>            
+            </div>
         </div>
     </div>
 </div>

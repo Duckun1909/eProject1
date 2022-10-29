@@ -1,0 +1,149 @@
+<div ng-controller="checkout" class="mb-5">
+    <div class="checkout-header mb-5">
+        <div class="container checkout-header__linker text-end">
+            <span class="checkout-header__linker-fromPage">
+                <i class="fa-solid fa-house-chimney pe-1 hover_link"></i>
+                <span class="pe-1 hover_link">Home</span>
+            </span>
+
+            <span class="checkout-header__linker-curPage">
+                <i class="fa-solid fa-caret-right pe-1"></i>
+                <span>Check Out</span>
+            </span>
+        </div>
+    </div>
+
+    <div class="container">
+        <header class="text-center">
+            <h2 class="border-bottom border-1 border-dark pb-2">Check Out</h2>
+        </header>
+        <section>
+            <div class="row mt-3">
+                <div class="col-8">
+                    <div class="customerInfor">
+                        <h4 class="customerInfor__title pt-3 pb-3">
+                            <i class="fa-sharp fa-solid fa-location-dot me-2" style="font-size: 1.25rem;"></i>Customer Information
+                        </h4>
+                        <div class="customerInfor__body p-3 shadow rounded">
+                            <div class="row">
+                                <div class="col-6 customerInfor__body-buying">
+                                    <h5 class="buying-tile text-smoke pt-2 pb-2">Buyer</h5>
+                                    <div class="buying-content">
+                                        <form action="" id="buyerForm">
+                                            <input type="text" class="buyerName w-100 pt-2 pb-2 ps-3 pe-3 mb-3 border rounded fs-7" ng-model="user.user_name" disabled>
+                                            <input type="text" class="buyerEmail w-100 pt-2 pb-2 ps-3 pe-3 mb-3 border rounded fs-7" ng-model="user.user_email" disabled>
+                                            <input type="text" class="buyerPhone w-100 pt-2 pb-2 ps-3 pe-3 mb-3 border rounded fs-7" ng-model="user.user_phone" disabled>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-6 customerInfor__body-receive">
+                                    <h5 class="take-tile text-smoke pt-2 pb-2">Receiver</h5>
+                                    <div class="receive-content">
+                                        <form action="" id="receiveForm">
+                                            <div class="mb-3"><input type="text" name="receiveName" class="w-100 pt-2 pb-2 ps-3 pe-3 border rounded fs-7" placeholder="Fullname" ng-model="shippingName" required></div>
+                                            <div class="mb-3"><input type="text" name="receivePhone" class="w-100 pt-2 pb-2 ps-3 pe-3  border rounded fs-7" placeholder="Phone" ng-model="shippingPhone" required></div>
+                                        </form>
+                                    </div>
+                                    <div style="cursor: pointer;" ng-click="copyInforUser(user.user_name, user.user_phone)">
+                                        <i class="fa-sharp fa-solid fa-paste fs-7"></i>
+                                        <span class="fs-7 text-smoke">Use of shopper information</span>
+                                    </div>
+                                </div>
+                                <div class="col-6 customerInfor__body-address">
+                                    <h5 class="address-tile text-smoke pt-2 pb-2">Address</h5>
+                                    <div class="address-content">
+                                        <form action="" id="addressForm">
+                                            <div class="mb-3"><input type="text" name="address" id="" class="w-100 pt-2 pb-2 ps-3 pe-3 border rounded fs-7" ng-model="shippingAddress" ng-blur="checkAddress(shippingAddress)" required></div>
+                                            <select name="" id="" class="d-none w-100 pt-2 pb-2 ps-3 pe-3 mb-3 border rounded fs-7 outline-unset">
+                                                <option value=""></option>
+                                            </select>
+                                            <select name="" id="" class="d-none w-100 pt-2 pb-2 ps-3 pe-3 mb-3 border rounded fs-7 outline-unset">
+                                                <option value=""></option>
+                                            </select>
+                                            <select name="" id="" class="d-none w-100 pt-2 pb-2 ps-3 pe-3 mb-3 border rounded fs-7 outline-unset">
+                                                <option value=""></option>
+                                            </select>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-6 customerInfor__body-deliveryMode">
+                                    <h5 class="deliveryMode-tile text-smoke pt-2 pb-2">Mode of Delivery</h5>
+                                    <div class="deliveryMode-content">
+                                        <div class="noSelect bg-warning bg-opacity-10 border p-2 fs-7" ng-hide="showShippingFee">
+                                            Please choose a shipping address
+                                        </div>
+                                        <div class="selected border p-2 d-flex align-items-center" ng-show="showShippingFee">
+                                            <input type="radio" name="" id="" class="me-2 fs-radio" checked>
+                                            <div>
+                                                <span class="d-block fs-7">Freeship</span>
+                                                <span class="d-block text-danger fs-7">Delivery has a fee. Shop will contact Buyer to negotiate shipping fee.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payments">
+                        <h4 class="payments__title pt-3 pb-3"><i class="fa-solid fa-sack-dollar me-2" style="font-size: 1.25rem;"></i>Payments</h4>
+                        <div class="payments__body p-3 shadow rounded">
+                            <div class="row">
+                                <div class="payments__body-item col-6 d-flex align-items-center mb-3">
+                                    <input type="radio" name="payment" class="me-2 fs-radio" checked>
+                                    <h4 class="fs-6 text-white text-center w-50 rounded rounded-1 ps-5" style="background: url('https://demo037136.web30s.vn/assets/images/payment/method_bg_cod.png'); height: 40px;line-height: 40px; background-repeat: no-repeat; background-color: #1bbc9b;">Payment on delivery</h4>
+                                </div>
+                                <div class="payments__body-item col-6 d-flex align-items-center mb-3 position-relative">
+                                    <input type="radio" name="payment" class="me-2 fs-radio input-banking">
+                                    <h4 class="fs-6 text-white text-center w-50 rounded rounded-1 ps-5" style="background: url('https://demo037136.web30s.vn/assets/images/payment/method_bg_online.png'); height: 40px;line-height: 40px; background-repeat: no-repeat; background-color: #3199d8;">Online payment</h4>
+                                    <div class="banking position-absolute top-100 p-2 bg-smoke" style="left:44px; display: none;">
+                                        <h6 class="bankingName fs-7 fw-bold"><span class="fs-7 text-smoke fw-normal">Bank Name: </span> Techcombank Bank</h6>
+                                        <h6 class="bankingCode fs-7 fw-bold"><span class="fs-7 text-smoke fw-normal">Account Number: </span> 19037610403011</h6>
+                                        <h6 class="bankingOwner fs-7 fw-bold"><span class="fs-7 text-smoke fw-normal">Owner Name: </span> Pham Huynh Duc</h6>
+                                    </div>
+                                </div>
+                                <div class="payments__body-item col-6 d-flex align-items-center mb-3 position-relative">
+                                    <input type="radio" name="payment" class="me-2 fs-radio">
+                                    <h4 class="fs-6 text-white text-center w-50 rounded rounded-1 ps-5" style="background: url('https://demo037136.web30s.vn/assets/images/payment/method_bg_home.png'); height: 40px;line-height: 40px; background-repeat: no-repeat; background-color: #c21334;">Payment at the store</h4>
+                                    <div class="position-absolute top-100 pt-2 fs-7 text-smoke" style="left:44px;">999, Hoang Mai street, Ha Noi City</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 ">
+                    <div class="orderInfor ">
+                        <div class="orderInfor__title pt-3 pb-3 d-flex align-items-center justify-content-between ">
+                            <h4><i class="fa-solid fa-cart-flatbed-suitcase me-2 " style="font-size: 1.25rem; "></i>Payments</h4>
+                            <button class="border rounded rounded-1 fs-7 p-1 bg-white border-dark bg-smoke dark-hover ">Edit</button>
+                        </div>
+                        <div class="orderInfor__body p-3 shadow rounded p-2 ">
+                            <div class="orderInfor__body-list mb-2 ">
+                                <div class="list-items d-flex pb-2 mb-2 border-bottom" ng-repeat="val in prdCart">
+                                    <img ng-src="{{val.product_avt}}" width="40px " height="40px " style="object-fit: contain; " alt=" ">
+                                    <div class="row w-100 ms-1 ">
+                                        <span class="col-6 p-0 ">{{val.product_name}}</span>
+                                        <span class="col-3 p-0 ">x{{val.quantity}}</span>
+                                        <span class="col-3 p-0 ">{{val.product_price * val.quantity}}</span>
+                                        <span class="col-4 p-0 text-danger ">{{val.product_material}}</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="orderInfor__body-total bg-smoke p-2 mb-2 ">
+                                <div class="pt-2 pb-2 border-bottom d-flex justify-content-between align-content-center "><span class="text-smoke ">Provisional</span><span class="text-danger ">{{totalPrice | currency:'$':0}}</span></div>
+                                <div class="pt-2 pb-2 border-bottom d-flex justify-content-between align-content-center "><span class="text-smoke ">Transport fee</span><span class="text-danger ">{{shippingFee | currency:'$':0}}</span></div>
+                                <div class="pt-2 pb-2 d-flex justify-content-between align-content-center "><span class="fw-bold ">Total</span><span class="text-danger ">{{totalPrice | currency:'$':0}}</span></div>
+                            </div>
+                            <div class="orderInfor__body-note ">
+                                <textarea name=" " id=" " cols="30 " rows="10 " class="fs-7 border w-100 outline-unset rounded rounded-1 p-2 " style="height: 65px; " placeholder="Note" ng-model="shippingNote"></textarea>
+                            </div>
+                            <button class="w-100 bg-primary bg-opacity-75 text-white pt-2 pb-2 rounded rounded-1 pay-hover" ng-click="addOrder(shippingName, shippingAddress, shippingPhone, shippingNote, userid)">Pay</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<script type="module" src="./assets/js/checkout.js"></script>

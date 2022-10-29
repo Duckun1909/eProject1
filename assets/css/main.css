@@ -46,12 +46,22 @@ input {
     color: #fff;
 }
 
+.btn-black {
+    background-color: #333;
+    color: #fff;
+}
+
+.btn-black:hover {
+    background-color: var(--back-item);
+    transition: all .1s linear;
+}
+
 .text-shadow {
     text-shadow: 0px 0px black;
 }
 
 .background--active {
-    background-color: var(--back-item) !important;
+    background-color: var(--back-item);
     color: #fff;
 }
 
@@ -62,9 +72,18 @@ input {
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+}
+
+.lh-100 {
+    line-height: 100%;
+}
+
+.hide-scrollbar {
+    overflow-y: scroll;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
 }
 
 @keyframes rotatePerspectiveIn {
@@ -133,6 +152,12 @@ input {
 .header__navbar .header__categories {
     width: 220px;
     max-width: 220px;
+    max-height: 250px;
+    overflow-y: scroll;
+}
+
+.header__categories::-webkit-scrollbar {
+    display: none;
 }
 
 .header__categories ul li {
@@ -196,12 +221,13 @@ input {
     max-width: 350px;
     opacity: 0;
     z-index: -2;
-    bottom: -80px
+    bottom: -80px;
+    display: flex;
 }
 
 .search_bar--zoomOut {
     animation: zoomOut 1.5s linear forwards;
-    opacity: 0;
+    display: none;
 }
 
 .search_bar--zoomIn {
@@ -235,7 +261,7 @@ input {
     box-shadow: rgb(0 0 0 / 50%) 0px 0px 8px;
     padding: 10px;
     background-color: #fff;
-    opacity: 0;
+    display: none;
     z-index: -2;
 }
 
@@ -247,6 +273,7 @@ input {
     opacity: 1;
     animation: flipInX 1.5s linear forwards;
     z-index: 0;
+    display: block;
 }
 
 .search_bar div {
@@ -475,4 +502,32 @@ footer div ul {
 
 .btn-gotofirst i {
     transform: rotate(-45deg);
+}
+
+
+/* Slick */
+
+.slick-slide {
+    margin: 0 8px;
+}
+
+
+/* the parent */
+
+.slick-list {
+    margin: 0 -8px;
+}
+
+
+/* Loader */
+
+.loader {
+    background-color: #333;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 0%;
+    z-index: 5;
+    display: flex;
 }
