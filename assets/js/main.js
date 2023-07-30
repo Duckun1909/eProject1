@@ -167,6 +167,7 @@ myApp
             url: './home.php',
             type: 'post',
             cache: false,
+            crossDomain: true,
             async: false,
             data: { getPrd: true },
             success: function(res) {
