@@ -1,5 +1,5 @@
 <?php
-    $host = 'sql106.epizy.com';
+    $host = 'sql106.infinityfree.com';
     $username = 'epiz_32650604';
     $password = 'GzfN1ntxr2';
     $db = 'epiz_32650604_FanimationPage';
