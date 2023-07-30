@@ -108,7 +108,8 @@ myApp
                 url: './login.php',
                 type: 'post',
                 cache: false,
-                async: false,
+                async: false,    
+                crossDomain: true,
                 dataType: 'json',
                 data: { checkLogin: true },
                 success: function(res) {
